@@ -26,7 +26,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#'
 #' @return A list containing operating characteristics such as:
 #' \describe{
 #'   \item{bd.sel}{OBD selection percentage}

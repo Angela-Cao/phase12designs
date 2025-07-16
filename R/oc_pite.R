@@ -35,7 +35,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#' 
 #' @return A list containing operating characteristics such as:
 #' \describe{
 #'   \item{bd.sel}{OBD selection percentage}
@@ -60,7 +60,6 @@ oc_pite <- function(ndose, target_t, target_e, lower_e, ncohort = 10,
     u1 <- 100
     u2 <- 0
   }
-
   qE <- lower_e
   parabeta <- c(1, 1)
   up.int.bound.tox <- seq(target_t + eps2, 1, min(eps1 + eps2, 1 - target_t - eps2))

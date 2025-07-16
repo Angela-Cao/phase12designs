@@ -29,7 +29,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#' 
 #' @return A list containing operating characteristics such as:
 #' \describe{
 #'   \item{bd.sel}{OBD selection percentage}
@@ -48,6 +48,7 @@ oc_boinet <- function(ndose, target_t, lower_e, ncohort = 10,
                       cohortsize = 3, startdose = 1, psafe = 0.95,
                       pfutility = 0.95, ntrial = 10000, utilitytype = 1,
                       prob = NULL) {
+  OBD <- 0
   stop <- 150
   safe <- 0
 
@@ -71,7 +72,7 @@ oc_boinet <- function(ndose, target_t, lower_e, ncohort = 10,
   ov.sel <- 0
   ntox <- 0
   neff <- 0
-  temp <- boinet.boundary(target_t, ncohort, cohortsize, cutoff.eli = psafe)
+  temp <- get.boundary.utb(target_t, ncohort, cohortsize, cutoff.eli = psafe)
   b.e <- temp[4, ]
   b.d <- temp[3, ]
   b.elim <- temp[2, ]

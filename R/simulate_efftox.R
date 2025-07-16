@@ -28,7 +28,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#' 
 #' @param save_dir Directory to save output folders. Default is (\code{"."}).
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")

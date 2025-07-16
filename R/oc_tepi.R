@@ -36,7 +36,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#' 
 #' @return A list containing operating characteristics such as:
 #' \describe{
 #'   \item{bd.sel}{OBD selection percentage}
@@ -85,7 +85,7 @@ oc_tepi <- function(ndose, target_t, lower_e, ncohort = 10, cohortsize = 3,
   ov.sel <- 0
   ntox <- 0
   neff <- 0
-  temp <- tepi.boundary(target_t, ncohort, cohortsize, cutoff.eli = psafe)
+  temp <- get.boundary.utb(target_t, ncohort, cohortsize, cutoff.eli = psafe)
   b.e <- temp[4, ] # escalation boundary
   b.d <- temp[3, ] # deescalation boundary
   b.elim <- temp[2, ] # elimination boundary

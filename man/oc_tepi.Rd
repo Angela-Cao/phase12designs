@@ -79,7 +79,6 @@ For example:
   obd = 3,
   mtd = 2
 )
-``
 }\if{html}{\out{</div>}}}
 }
 \value{
