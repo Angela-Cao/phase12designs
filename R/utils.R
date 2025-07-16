@@ -1,6 +1,6 @@
 simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
   if (OBD == 0) {
-    obd <-sample(ndose, 1)
+    obd <- sample(ndose, 1)
   } else {
     obd <- OBD
   }
@@ -11,7 +11,7 @@ simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
   uu <- runif(1)
   if (uu < prob_plateau && obd < ndose) {
     # generate plateau cases
-    while(obd.temp != obd || kk[obd] > (targetT + 0.05) || jj[obd] < (targetE + 0.05)) {
+    while (obd.temp != obd || kk[obd] > (targetT + 0.05) || jj[obd] < (targetE + 0.05)) {
       mtd <- (obd - 1) + sample(ndose - obd + 1, 1)
       D <- 1:ndose
       if (mtd < ndose) {
@@ -27,8 +27,8 @@ simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
         mtd.temp <- which.min(abs(kk - targetT))
       }
       bornesup <- runif(1, targetE + 0.10, 1.0)
-      #med=obd
-      #bornesup<-max(runif(med,targetE+0.10,0.9))
+      # med=obd
+      # bornesup<-max(runif(med,targetE+0.10,0.9))
       jj[1:obd] <- sort(runif(obd, 0, bornesup))
       jj[obd:ndose] <- jj[obd]
       utility <- u1 * jj + (1 - kk) * u2
@@ -36,30 +36,30 @@ simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
     }
   }
   if (uu >= prob_plateau && obd < ndose) {
-    # generate non-plateau cases 
+    # generate non-plateau cases
     while (obd.temp != obd || kk[obd] > (targetT + 0.05) || jj[obd] < (targetE + 0.05)) {
       mtd <- (obd - 1) + sample(ndose - obd + 1, 1)
       D <- 1:ndose
       if (mtd < ndose) {
         temp <- sort(runif(length(D) - mtd, targetT, 1))
-        bornesup <- max(targetT + 0.10,temp[length(D) - mtd])
+        bornesup <- max(targetT + 0.10, temp[length(D) - mtd])
       }
-      if(mtd == ndose) {
+      if (mtd == ndose) {
         bornesup <- targetT + (1 - targetT) * rbeta(1, 0.5, 1)
       }
       mtd.temp <- 0
-      while(mtd.temp != mtd) {
+      while (mtd.temp != mtd) {
         kk <- sort(runif(ndose, 0, bornesup))
         mtd.temp <- which.min(abs(kk - targetT))
       }
       med <- (obd - 1) + sample(ndose - obd + 1, 1)
       bornesup <- runif(1, targetE + 0.10, 1.0)
-      #bornesup<-max(runif(med,targetE+0.10,0.9))
+      # bornesup<-max(runif(med,targetE+0.10,0.9))
       jj[med] <- max(runif(ndose, 0, bornesup))
-      if(med > 1) {
+      if (med > 1) {
         jj[1:(med - 1)] <- sort(runif(med - 1, 0, jj[med]))
       }
-      if(med < ndose) {
+      if (med < ndose) {
         jj[(med + 1):ndose] <- sort(runif(ndose - med, 0, jj[med]), decreasing = TRUE)
       }
       utility <- u1 * jj + (1 - kk) * u2
@@ -78,13 +78,13 @@ simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
         bornesup <- targetT + (1 - targetT) * rbeta(1, 0.5, 1)
       }
       mtd.temp <- 0
-      while(mtd.temp != mtd) {
+      while (mtd.temp != mtd) {
         kk <- sort(runif(ndose, 0, bornesup))
         mtd.temp <- which.min(abs(kk - targetT))
       }
       bornesup <- runif(1, targetE + 0.10, 1.0)
-      #med=ndose
-      #bornesup<-max(runif(med,targetE+0.10,0.9))
+      # med=ndose
+      # bornesup<-max(runif(med,targetE+0.10,0.9))
       jj <- sort(runif(ndose, 0, bornesup))
       utility <- u1 * jj + (1 - kk) * u2
       obd.temp <- which.max(utility[1:mtd])
@@ -149,9 +149,8 @@ pava <- function(x, wt = rep(1, length(x))) {
 }
 
 get.boundary <- function(target, targetE, ncohort, cohortsize = 3,
-                         p.saf = NA, p.tox = NA, cutoff.eli = 0.95, 
+                         p.saf = NA, p.tox = NA, cutoff.eli = 0.95,
                          cutoff.eli.E = 0.90) {
-
   # if the user does not provide p.saf and p.tox, use the default values
   if (is.na(p.saf)) p.saf <- 0.6 * target
   if (is.na(p.tox)) p.tox <- 1.4 * target
@@ -185,13 +184,13 @@ get.boundary <- function(target, targetE, ncohort, cohortsize = 3,
     b.e <- c(b.e, cutoff1)
     b.d <- c(b.d, cutoff2)
 
-    elimineed <- 0  # indicating whether elimination is needed
+    elimineed <- 0 # indicating whether elimination is needed
     elimineedE <- 0
     if (n < 3) {
       elim <- c(elim, NA)
-      elimE <- c(elimE, NA)  # require treating at least 3 patients before eliminating a dose
+      elimE <- c(elimE, NA) # require treating at least 3 patients before eliminating a dose
     } else {
-      for (ntox in 3:n) {  # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
+      for (ntox in 3:n) { # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
         if (1 - pbeta(target, ntox + 1, n - ntox + 1) > cutoff.eli) {
           elimineed <- 1
           break
@@ -201,7 +200,7 @@ get.boundary <- function(target, targetE, ncohort, cohortsize = 3,
       if (elimineed == 1) {
         elim <- c(elim, ntox)
       } else {
-        elim <- c(elim, NA)  # set the elimination boundary large such that no elimination will actually occurs
+        elim <- c(elim, NA) # set the elimination boundary large such that no elimination will actually occurs
       }
 
       for (neff in n:0) {
@@ -226,8 +225,10 @@ get.boundary <- function(target, targetE, ncohort, cohortsize = 3,
   }
 
   boundaries <- rbind(ntrt, elim, b.d, b.e, elimE)
-  rownames(boundaries) <- c("Number of patients treated", "Eliminate if # of DLT >=",
-                            "Deescalate if # of DLT >=", "Escalate if # of DLT <=", "Eliminate if # of Eff <=")
+  rownames(boundaries) <- c(
+    "Number of patients treated", "Eliminate if # of DLT >=",
+    "Deescalate if # of DLT >=", "Escalate if # of DLT <=", "Eliminate if # of Eff <="
+  )
   colnames(boundaries) <- rep("", ncohort)
 
   return(boundaries)
@@ -256,229 +257,292 @@ ji3plus3 <- function(x, y, n, pT, eps1, eps2, pE) {
 }
 
 betavar <- function(a, b) {
-  resp <- a * b / ((a + b) ^ 2 * (a + b + 1))
+  resp <- a * b / ((a + b)^2 * (a + b + 1))
   return(resp)
 }
 
-	## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
-stein.boundary <- function(target, ncohort, cohortsize=3, p.saf=NA, p.tox=NA,  cutoff.eli=0.95) {
-# if the user does not provide p.saf and p.tox, use the default values
-		if(is.na(p.saf)) p.saf=0.75*target;
-		if(is.na(p.tox)) p.tox=1.25*target;
+## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
+stein.boundary <- function(target, ncohort, cohortsize = 3, p.saf = NA, p.tox = NA, cutoff.eli = 0.95) {
+  # if the user does not provide p.saf and p.tox, use the default values
+  if (is.na(p.saf)) p.saf <- 0.75 * target
+  if (is.na(p.tox)) p.tox <- 1.25 * target
 
-### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
-		npts = ncohort*cohortsize;
-		ntrt=NULL; b.e=NULL; b.d=NULL; elim=NULL;
-		for(n in (1:ncohort)*cohortsize)
-		{
-			error.min=3;
-			for(m1 in 0:(n-1))
-			{
-				for(m2 in (m1+1):n)
-				{
- 
-						error1 = pbinom(m1, n, target)+1-pbinom(m2-1, n, target);
-						error2 = 1-pbinom(m1, n, p.saf);
-						error3 = pbinom(m2-1, n, p.tox);
-					
-					error=error1+error2+error3;
-					if(error<error.min) {error.min=error; cutoff1=m1; cutoff2=m2;}
-				}
-			}
-			ntrt = c(ntrt, n);
-			b.e = c(b.e, cutoff1);
-			b.d = c(b.d, cutoff2);
-			
-			elimineed=0; # indicating whether elimination is needed
-			if(n<3) { elim = c(elim, NA); }  # require treating at least 3 patients before eliminating a dose
-			else
-			{
-				for(ntox in 3:n) #determine elimination boundary, prior beta(1,1) is used in beta-binomial model
-				{
-					if(1-pbeta(target, ntox+1, n-ntox+1)>cutoff.eli) {elimineed=1; break;}
-				}
-				if(elimineed==1) { elim = c(elim, ntox); }
-				else { elim = c(elim, NA); } # set the elimination boundary large such that no elimination will actually occurs
-			}
-		}
-		for(i in 1:length(b.d)) { if(!is.na(elim[i]) && (b.d[i]>elim[i])) b.d[i]=elim[i]; }
-		boundaries = rbind(ntrt, elim, b.d, b.e);
-		rownames(boundaries) = c("Number of patients treated", "Eliminate if # of DLT >=", 
-								 "Deescalate if # of DLT >=",  "Escalate if # of DLT <=");
-		colnames(boundaries) = rep("", ncohort);
-		
-		return(boundaries);
-	}
-
-tepi.boundary <- function(target, ncohort, cohortsize=3, p.saf=NA, p.tox=NA,  cutoff.eli=0.95) {
-    
-    # if the user does not provide p.saf and p.tox, use the default values
-    if(is.na(p.saf)) p.saf=0.6*target;
-    if(is.na(p.tox)) p.tox=1.4*target;
-    
-    ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
-    npts = ncohort*cohortsize;
-    ntrt=NULL; b.e=NULL; b.d=NULL; elim=NULL;
-    for(n in (1:ncohort)*cohortsize)
-    {
-      error.min=3;
-      for(m1 in 0:(n-1))
-      {
-        for(m2 in (m1+1):n)
-        {
-          
-          error1 = pbinom(m1, n, target)+1-pbinom(m2-1, n, target);
-          error2 = 1-pbinom(m1, n, p.saf);
-          error3 = pbinom(m2-1, n, p.tox);
-          
-          error=error1+error2+error3;
-          if(error<error.min) {error.min=error; cutoff1=m1; cutoff2=m2;}
-        }
-      }
-      ntrt = c(ntrt, n);
-      b.e = c(b.e, cutoff1);
-      b.d = c(b.d, cutoff2);
-      
-      elimineed=0; # indicating whether elimination is needed
-      if(n<3) { elim = c(elim, NA); }  # require treating at least 3 patients before eliminating a dose
-      else
-      {
-        for(ntox in 3:n) #determine elimination boundary, prior beta(1,1) is used in beta-binomial model
-        {
-          if(1-pbeta(target, ntox+1, n-ntox+1)>cutoff.eli) {elimineed=1; break;}
-        }
-        if(elimineed==1) { elim = c(elim, ntox); }
-        else { elim = c(elim, NA); } # set the elimination boundary large such that no elimination will actually occurs
-      }
-    }
-    for(i in 1:length(b.d)) { if(!is.na(elim[i]) && (b.d[i]>elim[i])) b.d[i]=elim[i]; }
-    boundaries = rbind(ntrt, elim, b.d, b.e);
-    rownames(boundaries) = c("Number of patients treated", "Eliminate if # of DLT >=", 
-                             "Deescalate if # of DLT >=",  "Escalate if # of DLT <=");
-    colnames(boundaries) = rep("", ncohort);
-    
-    return(boundaries);
-  }
-
-  ## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
-utpi.boundary <- function(target, ncohort, cohortsize=3, p.saf=NA, p.tox=NA,  cutoff.eli=0.95)
+  ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
+  npts <- ncohort * cohortsize
+  ntrt <- NULL
+  b.e <- NULL
+  b.d <- NULL
+  elim <- NULL
+  for (n in (1:ncohort) * cohortsize)
   {
-    
-    # if the user does not provide p.saf and p.tox, use the default values
-    if(is.na(p.saf)) p.saf=0.6*target;
-    if(is.na(p.tox)) p.tox=1.4*target;
-    
-    ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
-    npts = ncohort*cohortsize;
-    ntrt=NULL; b.e=NULL; b.d=NULL; elim=NULL;
-    for(n in (1:ncohort)*cohortsize)
+    error.min <- 3
+    for (m1 in 0:(n - 1))
     {
-      error.min=3;
-      for(m1 in 0:(n-1))
+      for (m2 in (m1 + 1):n)
       {
-        for(m2 in (m1+1):n)
-        {
-          
-          error1 = pbinom(m1, n, target)+1-pbinom(m2-1, n, target);
-          error2 = 1-pbinom(m1, n, p.saf);
-          error3 = pbinom(m2-1, n, p.tox);
-          
-          error=error1+error2+error3;
-          if(error<error.min) {error.min=error; cutoff1=m1; cutoff2=m2;}
+        error1 <- pbinom(m1, n, target) + 1 - pbinom(m2 - 1, n, target)
+        error2 <- 1 - pbinom(m1, n, p.saf)
+        error3 <- pbinom(m2 - 1, n, p.tox)
+
+        error <- error1 + error2 + error3
+        if (error < error.min) {
+          error.min <- error
+          cutoff1 <- m1
+          cutoff2 <- m2
         }
-      }
-      ntrt = c(ntrt, n);
-      b.e = c(b.e, cutoff1);
-      b.d = c(b.d, cutoff2);
-      
-      elimineed=0; # indicating whether elimination is needed
-      if(n<3) { elim = c(elim, NA); }  # require treating at least 3 patients before eliminating a dose
-      else
-      {
-        for(ntox in 3:n) #determine elimination boundary, prior beta(1,1) is used in beta-binomial model
-        {
-          if(1-pbeta(target, ntox+1, n-ntox+1)>cutoff.eli) {elimineed=1; break;}
-        }
-        if(elimineed==1) { elim = c(elim, ntox); }
-        else { elim = c(elim, NA); } # set the elimination boundary large such that no elimination will actually occurs
       }
     }
-    for(i in 1:length(b.d)) { if(!is.na(elim[i]) && (b.d[i]>elim[i])) b.d[i]=elim[i]; }
-    boundaries = rbind(ntrt, elim, b.d, b.e);
-    rownames(boundaries) = c("Number of patients treated", "Eliminate if # of DLT >=", 
-                             "Deescalate if # of DLT >=",  "Escalate if # of DLT <=");
-    colnames(boundaries) = rep("", ncohort);
-    
-    return(boundaries);
+    ntrt <- c(ntrt, n)
+    b.e <- c(b.e, cutoff1)
+    b.d <- c(b.d, cutoff2)
+
+    elimineed <- 0 # indicating whether elimination is needed
+    if (n < 3) {
+      elim <- c(elim, NA)
+    } # require treating at least 3 patients before eliminating a dose
+    else {
+      for (ntox in 3:n) # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
+      {
+        if (1 - pbeta(target, ntox + 1, n - ntox + 1) > cutoff.eli) {
+          elimineed <- 1
+          break
+        }
+      }
+      if (elimineed == 1) {
+        elim <- c(elim, ntox)
+      } else {
+        elim <- c(elim, NA)
+      } # set the elimination boundary large such that no elimination will actually occurs
+    }
   }
-  ## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
-boinet.boundary <- function(target, ncohort, cohortsize=3, p.saf=NA, p.tox=NA,  cutoff.eli=0.95)
+  for (i in 1:length(b.d)) {
+    if (!is.na(elim[i]) && (b.d[i] > elim[i])) b.d[i] <- elim[i]
+  }
+  boundaries <- rbind(ntrt, elim, b.d, b.e)
+  rownames(boundaries) <- c(
+    "Number of patients treated", "Eliminate if # of DLT >=",
+    "Deescalate if # of DLT >=", "Escalate if # of DLT <="
+  )
+  colnames(boundaries) <- rep("", ncohort)
+
+  return(boundaries)
+}
+
+tepi.boundary <- function(target, ncohort, cohortsize = 3, p.saf = NA, p.tox = NA, cutoff.eli = 0.95) {
+  # if the user does not provide p.saf and p.tox, use the default values
+  if (is.na(p.saf)) p.saf <- 0.6 * target
+  if (is.na(p.tox)) p.tox <- 1.4 * target
+
+  ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
+  npts <- ncohort * cohortsize
+  ntrt <- NULL
+  b.e <- NULL
+  b.d <- NULL
+  elim <- NULL
+  for (n in (1:ncohort) * cohortsize)
   {
-    
-    # if the user does not provide p.saf and p.tox, use the default values
-    if(is.na(p.saf)) p.saf=0.6*target;
-    if(is.na(p.tox)) p.tox=1.4*target;
-    
-    ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
-    npts = ncohort*cohortsize;
-    ntrt=NULL; b.e=NULL; b.d=NULL; elim=NULL;
-    for(n in (1:ncohort)*cohortsize)
+    error.min <- 3
+    for (m1 in 0:(n - 1))
     {
-      error.min=3;
-      for(m1 in 0:(n-1))
+      for (m2 in (m1 + 1):n)
       {
-        for(m2 in (m1+1):n)
-        {
-          
-          error1 = pbinom(m1, n, target)+1-pbinom(m2-1, n, target);
-          error2 = 1-pbinom(m1, n, p.saf);
-          error3 = pbinom(m2-1, n, p.tox);
-          
-          error=error1+error2+error3;
-          if(error<error.min) {error.min=error; cutoff1=m1; cutoff2=m2;}
+        error1 <- pbinom(m1, n, target) + 1 - pbinom(m2 - 1, n, target)
+        error2 <- 1 - pbinom(m1, n, p.saf)
+        error3 <- pbinom(m2 - 1, n, p.tox)
+
+        error <- error1 + error2 + error3
+        if (error < error.min) {
+          error.min <- error
+          cutoff1 <- m1
+          cutoff2 <- m2
         }
-      }
-      ntrt = c(ntrt, n);
-      b.e = c(b.e, cutoff1);
-      b.d = c(b.d, cutoff2);
-      
-      elimineed=0; # indicating whether elimination is needed
-      if(n<3) { elim = c(elim, NA); }  # require treating at least 3 patients before eliminating a dose
-      else
-      {
-        for(ntox in 3:n) #determine elimination boundary, prior beta(1,1) is used in beta-binomial model
-        {
-          if(1-pbeta(target, ntox+1, n-ntox+1)>cutoff.eli) {elimineed=1; break;}
-        }
-        if(elimineed==1) { elim = c(elim, ntox); }
-        else { elim = c(elim, NA); } # set the elimination boundary large such that no elimination will actually occurs
       }
     }
-    for(i in 1:length(b.d)) { if(!is.na(elim[i]) && (b.d[i]>elim[i])) b.d[i]=elim[i]; }
-    boundaries = rbind(ntrt, elim, b.d, b.e);
-    rownames(boundaries) = c("Number of patients treated", "Eliminate if # of DLT >=", 
-                             "Deescalate if # of DLT >=",  "Escalate if # of DLT <=");
-    colnames(boundaries) = rep("", ncohort);
-    
-    return(boundaries);
+    ntrt <- c(ntrt, n)
+    b.e <- c(b.e, cutoff1)
+    b.d <- c(b.d, cutoff2)
+
+    elimineed <- 0 # indicating whether elimination is needed
+    if (n < 3) {
+      elim <- c(elim, NA)
+    } # require treating at least 3 patients before eliminating a dose
+    else {
+      for (ntox in 3:n) # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
+      {
+        if (1 - pbeta(target, ntox + 1, n - ntox + 1) > cutoff.eli) {
+          elimineed <- 1
+          break
+        }
+      }
+      if (elimineed == 1) {
+        elim <- c(elim, ntox)
+      } else {
+        elim <- c(elim, NA)
+      } # set the elimination boundary large such that no elimination will actually occurs
+    }
   }
-
-pos<-function(pE,yE,yT,n,u1,u2,u){
-      f<-dbeta(pE,yE+1,n-yE+1)
-      f<-f*pbeta((u1*pE+u2-u)/u2,yT+1,n-yT+1)
-      return(f)
+  for (i in 1:length(b.d)) {
+    if (!is.na(elim[i]) && (b.d[i] > elim[i])) b.d[i] <- elim[i]
   }
+  boundaries <- rbind(ntrt, elim, b.d, b.e)
+  rownames(boundaries) <- c(
+    "Number of patients treated", "Eliminate if # of DLT >=",
+    "Deescalate if # of DLT >=", "Escalate if # of DLT <="
+  )
+  colnames(boundaries) <- rep("", ncohort)
+
+  return(boundaries)
+}
+
+## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
+utpi.boundary <- function(target, ncohort, cohortsize = 3, p.saf = NA, p.tox = NA, cutoff.eli = 0.95) {
+  # if the user does not provide p.saf and p.tox, use the default values
+  if (is.na(p.saf)) p.saf <- 0.6 * target
+  if (is.na(p.tox)) p.tox <- 1.4 * target
+
+  ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
+  npts <- ncohort * cohortsize
+  ntrt <- NULL
+  b.e <- NULL
+  b.d <- NULL
+  elim <- NULL
+  for (n in (1:ncohort) * cohortsize)
+  {
+    error.min <- 3
+    for (m1 in 0:(n - 1))
+    {
+      for (m2 in (m1 + 1):n)
+      {
+        error1 <- pbinom(m1, n, target) + 1 - pbinom(m2 - 1, n, target)
+        error2 <- 1 - pbinom(m1, n, p.saf)
+        error3 <- pbinom(m2 - 1, n, p.tox)
+
+        error <- error1 + error2 + error3
+        if (error < error.min) {
+          error.min <- error
+          cutoff1 <- m1
+          cutoff2 <- m2
+        }
+      }
+    }
+    ntrt <- c(ntrt, n)
+    b.e <- c(b.e, cutoff1)
+    b.d <- c(b.d, cutoff2)
+
+    elimineed <- 0 # indicating whether elimination is needed
+    if (n < 3) {
+      elim <- c(elim, NA)
+    } # require treating at least 3 patients before eliminating a dose
+    else {
+      for (ntox in 3:n) # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
+      {
+        if (1 - pbeta(target, ntox + 1, n - ntox + 1) > cutoff.eli) {
+          elimineed <- 1
+          break
+        }
+      }
+      if (elimineed == 1) {
+        elim <- c(elim, ntox)
+      } else {
+        elim <- c(elim, NA)
+      } # set the elimination boundary large such that no elimination will actually occurs
+    }
+  }
+  for (i in 1:length(b.d)) {
+    if (!is.na(elim[i]) && (b.d[i] > elim[i])) b.d[i] <- elim[i]
+  }
+  boundaries <- rbind(ntrt, elim, b.d, b.e)
+  rownames(boundaries) <- c(
+    "Number of patients treated", "Eliminate if # of DLT >=",
+    "Deescalate if # of DLT >=", "Escalate if # of DLT <="
+  )
+  colnames(boundaries) <- rep("", ncohort)
+
+  return(boundaries)
+}
+## to make get.oc as self-contained function, we copied functions get.boundary() and select.mtd() here.
+boinet.boundary <- function(target, ncohort, cohortsize = 3, p.saf = NA, p.tox = NA, cutoff.eli = 0.95) {
+  # if the user does not provide p.saf and p.tox, use the default values
+  if (is.na(p.saf)) p.saf <- 0.6 * target
+  if (is.na(p.tox)) p.tox <- 1.4 * target
+
+  ### numerical search for the boundaries that minimize decision errors of dose escalation/deescalation
+  npts <- ncohort * cohortsize
+  ntrt <- NULL
+  b.e <- NULL
+  b.d <- NULL
+  elim <- NULL
+  for (n in (1:ncohort) * cohortsize)
+  {
+    error.min <- 3
+    for (m1 in 0:(n - 1))
+    {
+      for (m2 in (m1 + 1):n)
+      {
+        error1 <- pbinom(m1, n, target) + 1 - pbinom(m2 - 1, n, target)
+        error2 <- 1 - pbinom(m1, n, p.saf)
+        error3 <- pbinom(m2 - 1, n, p.tox)
+
+        error <- error1 + error2 + error3
+        if (error < error.min) {
+          error.min <- error
+          cutoff1 <- m1
+          cutoff2 <- m2
+        }
+      }
+    }
+    ntrt <- c(ntrt, n)
+    b.e <- c(b.e, cutoff1)
+    b.d <- c(b.d, cutoff2)
+
+    elimineed <- 0 # indicating whether elimination is needed
+    if (n < 3) {
+      elim <- c(elim, NA)
+    } # require treating at least 3 patients before eliminating a dose
+    else {
+      for (ntox in 3:n) # determine elimination boundary, prior beta(1,1) is used in beta-binomial model
+      {
+        if (1 - pbeta(target, ntox + 1, n - ntox + 1) > cutoff.eli) {
+          elimineed <- 1
+          break
+        }
+      }
+      if (elimineed == 1) {
+        elim <- c(elim, ntox)
+      } else {
+        elim <- c(elim, NA)
+      } # set the elimination boundary large such that no elimination will actually occurs
+    }
+  }
+  for (i in 1:length(b.d)) {
+    if (!is.na(elim[i]) && (b.d[i] > elim[i])) b.d[i] <- elim[i]
+  }
+  boundaries <- rbind(ntrt, elim, b.d, b.e)
+  rownames(boundaries) <- c(
+    "Number of patients treated", "Eliminate if # of DLT >=",
+    "Deescalate if # of DLT >=", "Escalate if # of DLT <="
+  )
+  colnames(boundaries) <- rep("", ncohort)
+
+  return(boundaries)
+}
+
+pos <- function(pE, yE, yT, n, u1, u2, u) {
+  f <- dbeta(pE, yE + 1, n - yE + 1)
+  f <- f * pbeta((u1 * pE + u2 - u) / u2, yT + 1, n - yT + 1)
+  return(f)
+}
 
 
-upmgen <- function(tbound,ebound,parabeta,n,ntox,neff){
-  upm <- matrix(0,length(tbound)-1,length(ebound)-1)
-  for (i in 1:(length(tbound)-1)){
-    for (j in 1:(length(ebound)-1)){
-      upm[i,j]=( pbeta(tbound[i+1],parabeta[1]+ntox,parabeta[2]+n-ntox) - 
-                   pbeta(tbound[i],parabeta[1]+ntox,parabeta[2]+n-ntox) ) * 
-        ( pbeta(ebound[j+1],parabeta[1]+neff,parabeta[2]+n-neff) - 
-            pbeta(ebound[j],parabeta[1]+neff,parabeta[2]+n-neff) ) / 
-        ((tbound[i+1]-tbound[i])*(ebound[j+1]-ebound[j]))
+upmgen <- function(tbound, ebound, parabeta, n, ntox, neff) {
+  upm <- matrix(0, length(tbound) - 1, length(ebound) - 1)
+  for (i in 1:(length(tbound) - 1)) {
+    for (j in 1:(length(ebound) - 1)) {
+      upm[i, j] <- (pbeta(tbound[i + 1], parabeta[1] + ntox, parabeta[2] + n - ntox) -
+        pbeta(tbound[i], parabeta[1] + ntox, parabeta[2] + n - ntox)) *
+        (pbeta(ebound[j + 1], parabeta[1] + neff, parabeta[2] + n - neff) -
+          pbeta(ebound[j], parabeta[1] + neff, parabeta[2] + n - neff)) /
+        ((tbound[i + 1] - tbound[i]) * (ebound[j + 1] - ebound[j]))
     }
   }
   return(upm)
@@ -495,15 +559,15 @@ maptoDEC <- function(index) {
   return(DEC)
 }
 
-upmgen <- function(tbound,ebound,parabeta,n,ntox,neff){
-  upm <- matrix(0,length(tbound)-1,length(ebound)-1)
-  for (i in 1:(length(tbound)-1)){
-    for (j in 1:(length(ebound)-1)){
-      upm[i,j]=( pbeta(tbound[i+1],parabeta[1]+ntox,parabeta[2]+n-ntox) - 
-                   pbeta(tbound[i],parabeta[1]+ntox,parabeta[2]+n-ntox) ) * 
-        ( pbeta(ebound[j+1],parabeta[1]+neff,parabeta[2]+n-neff) - 
-            pbeta(ebound[j],parabeta[1]+neff,parabeta[2]+n-neff) ) / 
-        ((tbound[i+1]-tbound[i])*(ebound[j+1]-ebound[j]))
+upmgen <- function(tbound, ebound, parabeta, n, ntox, neff) {
+  upm <- matrix(0, length(tbound) - 1, length(ebound) - 1)
+  for (i in 1:(length(tbound) - 1)) {
+    for (j in 1:(length(ebound) - 1)) {
+      upm[i, j] <- (pbeta(tbound[i + 1], parabeta[1] + ntox, parabeta[2] + n - ntox) -
+        pbeta(tbound[i], parabeta[1] + ntox, parabeta[2] + n - ntox)) *
+        (pbeta(ebound[j + 1], parabeta[1] + neff, parabeta[2] + n - neff) -
+          pbeta(ebound[j], parabeta[1] + neff, parabeta[2] + n - neff)) /
+        ((tbound[i + 1] - tbound[i]) * (ebound[j + 1] - ebound[j]))
     }
   }
   return(upm)

@@ -12,7 +12,7 @@
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
 #'   - If set to `2`: Use (w11 = 1, w00 = 0)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
 #'   - `obd`: Integer indicating the index of the true Optimal Biological Dose (OBD).
@@ -80,7 +80,8 @@ oc_efftox <- function(ndose, target_t, lower_e,
   incoherent <- 0
   overdose <- 0
   u.mean <- 0
-  pp <- efftox_solve_p(eff0 = eff0, tox1 = tox1,
+  pp <- efftox_solve_p(
+    eff0 = eff0, tox1 = tox1,
     eff_star = eff_star, tox_star = tox_star
   )
   dat <- list(
@@ -114,11 +115,13 @@ oc_efftox <- function(ndose, target_t, lower_e,
     u.true <- (u1 * pE.true + (1 - pT.true) * u2)
     bd <- probs$obd
     mtd <- probs$mtd
-    temp <- efftox_simulate(dat, num_sims = 1, first_dose = startdose,
-                          true_eff = pE.true, true_tox = pT.true,
-                          cohort_sizes = rep(cohortsize, ncohort),
-                          chains = 1, iter = 500, show_messages = FALSE,
-                          open_progress = FALSE, refresh = 0)
+    temp <- efftox_simulate(dat,
+      num_sims = 1, first_dose = startdose,
+      true_eff = pE.true, true_tox = pT.true,
+      cohort_sizes = rep(cohortsize, ncohort),
+      chains = 1, iter = 500, show_messages = FALSE,
+      open_progress = FALSE, refresh = 0
+    )
 
     if (is.na(temp$recommended_dose)) {
       dselect[trial] <- 99
@@ -134,7 +137,7 @@ oc_efftox <- function(ndose, target_t, lower_e,
       if (pT.true[d_opt] > (targetT + 0.1)) {
         ov.sel <- ov.sel + 1 / ntrial * 100
       }
-      if (abs(u.true[d_opt]-u.true[bd]) <= (0.05* u.true[bd]) && d_opt <= mtd) {
+      if (abs(u.true[d_opt] - u.true[bd]) <= (0.05 * u.true[bd]) && d_opt <= mtd) {
         od.sel <- od.sel + 1 / ntrial * 100
       }
     }
@@ -146,9 +149,9 @@ oc_efftox <- function(ndose, target_t, lower_e,
     for (j in 1:ndose) {
       n[j] <- sum(as.numeric(unlist(temp$doses_given)) == j)
       yE[j] <- sum(as.numeric(unlist(temp$efficacies))
-                   [as.numeric(unlist(temp$doses_given)) == j])
+      [as.numeric(unlist(temp$doses_given)) == j])
       yT[j] <- sum(as.numeric(unlist(temp$toxicities))
-                   [as.numeric(unlist(temp$doses_given)) == j])
+      [as.numeric(unlist(temp$doses_given)) == j])
     }
     bd.pts <- bd.pts + n[bd] / ntrial / npts * 100
     dose_mask <- abs(u.true[1:mtd] - u.true[bd]) <= (0.05 * u.true[bd])
@@ -156,14 +159,16 @@ oc_efftox <- function(ndose, target_t, lower_e,
     if (n[bd] < (npts / ndose)) {
       poorall <- poorall + 1 / ntrial * 100
     }
-    overdose <- overdose + sum(n[pT.true>(targetT + 0.1)]) / ntrial / npts * 100
+    overdose <- overdose + sum(n[pT.true > (targetT + 0.1)]) / ntrial / npts * 100
   }
 
-  results <- list(bd.sel = bd.sel, od.sel = od.sel,
-                  bd.pts = bd.pts, od.pts = od.pts,
-                  earlystop = earlystop, ntox = ntox,
-                  neff = neff, u.mean = u.mean,
-                  overdose = overdose, poorall = poorall,
-                  incoherent = 0, ov.sel = ov.sel)
+  results <- list(
+    bd.sel = bd.sel, od.sel = od.sel,
+    bd.pts = bd.pts, od.pts = od.pts,
+    earlystop = earlystop, ntox = ntox,
+    neff = neff, u.mean = u.mean,
+    overdose = overdose, poorall = poorall,
+    incoherent = 0, ov.sel = ov.sel
+  )
   return(results)
 }

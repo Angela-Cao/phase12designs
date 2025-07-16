@@ -14,7 +14,7 @@
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
 #'   - If set to `2`: Use (w11 = 1, w00 = 0)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
 #'   - `obd`: Integer indicating the index of the true Optimal Biological Dose (OBD).
@@ -35,7 +35,7 @@
 #' @return Results are saved as CSV files organized by OBD within folders.
 #'
 #' @export
-simulate_efftox <- function(ndose, ssizerange, target_t, target_e,
+simulate_efftox <- function(ndose, ssizerange, target_t, lower_e,
                             startdose = 1, ntrial = 10000,
                             utilitytype = 1, prob = NULL, save_dir = ".",
                             save_folder = "efftox_simulations",
@@ -63,21 +63,27 @@ simulate_efftox <- function(ndose, ssizerange, target_t, target_e,
       utype <- xmat[kk, 2]
       rtype <- xmat[kk, 3]
 
-     oc <- oc_efftox(ndose = ndose, target_t = target_t, target_e = target_e,
-                     ncohort = i, startdose = startdose, ntrial = ntrial,
-                     utilitytype = utype, prob)
-    #print(i)
-    result_row <- c(i, utype, rtype,
-                    oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts,
-                    oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)
+      oc <- oc_efftox(
+        ndose = ndose, target_t = target_t, lower_e = lower_e,
+        ncohort = i, startdose = startdose, ntrial = ntrial,
+        utilitytype = utype, prob = prob
+      )
+      # print(i)
+      result_row <- c(
+        i, utype, rtype,
+        oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts,
+        oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel
+      )
 
       outputmat <- rbind(outputmat, result_row)
     }
 
     outputmat <- as.data.frame(outputmat)
-    colnames(outputmat) <- c("ncohort", "utype", "rtype",
-                             "bd.sel", "od.sel", "bd.pts", "od.pts",
-                             "earlystop", "overdose", "poorall", "ov.sel")
+    colnames(outputmat) <- c(
+      "ncohort", "utype", "rtype",
+      "bd.sel", "od.sel", "bd.pts", "od.pts",
+      "earlystop", "overdose", "poorall", "ov.sel"
+    )
 
     outputmat$design <- "efftox"
 

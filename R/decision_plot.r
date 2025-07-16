@@ -22,7 +22,7 @@
 #' @examples
 #' zones <- list(list(xmin = 0.0, xmax = 0.2, ymin = 0, ymax = 1.0, color = "#a8eea8"),
 #'               list(xmin = .2, xmax = .3, ymin = 0, ymax = 0.6, color = "#a8eea8"),
-#'               list(xmin = .2, xmax = .3, ymin = .6, ymax = 1, color = "#a8d5ee")))
+#'               list(xmin = .2, xmax = .3, ymin = .6, ymax = 1, color = "#a8d5ee"))
 #' plot_decision_zones("test_plot1.png",
 #'                     filetype = "png", zones = zones,
 #'                     title = "Decision Zones")

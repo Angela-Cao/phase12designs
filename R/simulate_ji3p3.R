@@ -23,7 +23,7 @@
 #' @param u1 Numeric. Utility parameter w_11. (0-100)
 #' @param u2 Numeric. Utility parameter w_00. (0-100)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #' Use this parameter to provide fixed probability vectors as a list with the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
@@ -38,7 +38,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``
+#' ```
 #' @param save_dir Directory to save output folders. Default is (\code{"."}).
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
@@ -61,19 +61,23 @@ simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
         for (i in ssizerange) {
-          oc <- oc_ji3p3(ndose = ndose, target_t = target_t,
-                         target_e = target_e, lower_e = lower_e, ncohort = i,
-                         cohortsize = cohortsize, startdose = startdose,
-                         eps1 = eps1, eps2 = eps2, u1, u2,
-                         psafe = psafe, pfutility = pfutility, ntrial = ntrial,
-                         utilitytype = utype, prob = prob)
+          oc <- oc_ji3p3(
+            ndose = ndose, target_t = target_t,
+            target_e = target_e, lower_e = lower_e, ncohort = i,
+            cohortsize = cohortsize, startdose = startdose,
+            eps1 = eps1, eps2 = eps2, u1, u2,
+            psafe = psafe, pfutility = pfutility, ntrial = ntrial,
+            utilitytype = utype, prob = prob
+          )
           print(i)
-          outputmat <- rbind(outputmat,c(i,utype,rtype,c(oc$bd.sel,oc$od.sel,oc$bd.pts,oc$od.pts,oc$earlystop,oc$overdose,oc$poorall,oc$ov.sel)))
+          outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
     }
-    cname <- c("ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
-               "od.pts", "earlystop", "overdose", "poorall", "ov.sel")
+    cname <- c(
+      "ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
+      "od.pts", "earlystop", "overdose", "poorall", "ov.sel"
+    )
     colnames(outputmat) <- cname
     cname <- c(cname, "design")
     outputmat <- cbind(outputmat, rep("ji3p3", nrow(outputmat)))

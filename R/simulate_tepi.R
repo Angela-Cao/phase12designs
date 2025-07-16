@@ -45,13 +45,13 @@
 #' @return Results are saved as CSV files organized by OBD within folders.
 #'
 #' @export
-#set.seed(30)
+# set.seed(30)
 simulate_tepi <- function(ndose, ssizerange, target_t, lower_e,
                           cohortsize = 3, startdose = 1,
-                          effint_l = c(0,lower_e,lower_e+0.2,lower_e+0.4),
-                          effint_u = c(lower_e,lower_e+0.2,lower_e+0.4,1),
-                          toxint_l = c(0,0.15,target_t,target_t+0.05),
-                          toxint_u = c(0.15,target_t,target_t+0.05,1),
+                          effint_l = c(0, lower_e, lower_e + 0.2, lower_e + 0.4),
+                          effint_u = c(lower_e, lower_e + 0.2, lower_e + 0.4, 1),
+                          toxint_l = c(0, 0.15, target_t, target_t + 0.05),
+                          toxint_u = c(0.15, target_t, target_t + 0.05, 1),
                           psafe = 0.95, pfutility = 0.9,
                           ntrial = 10000,
                           utilitytype = 1, u1, u2, prob = NULL,
@@ -60,27 +60,31 @@ simulate_tepi <- function(ndose, ssizerange, target_t, lower_e,
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
-  for (iii in 1:ndose){
+  for (iii in 1:ndose) {
     OBD <<- iii
 
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
         for (i in ssizerange) {
-          oc = oc_tepi(ndose=ndose, target_t=target_t,lower_e=lower_e, ncohort=i,
-                       cohortsize=cohortsize, startdose=startdose,
-                       effint_l = effint_l, effint_u = effint_u,
-                       toxint_l = toxint_l, toxint_u = toxint_u,
-                       psafe = psafe, pfutility = pfutility,
-                       ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
-                       prob = prob)
+          oc <- oc_tepi(
+            ndose = ndose, target_t = target_t, lower_e = lower_e, ncohort = i,
+            cohortsize = cohortsize, startdose = startdose,
+            effint_l = effint_l, effint_u = effint_u,
+            toxint_l = toxint_l, toxint_u = toxint_u,
+            psafe = psafe, pfutility = pfutility,
+            ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
+            prob = prob
+          )
           print(i)
-          outputmat=rbind(outputmat,c(i,utype,rtype,c(oc$bd.sel,oc$od.sel,oc$bd.pts,oc$od.pts,oc$earlystop,oc$overdose,oc$poorall,oc$ov.sel)))
+          outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
     }
-    cname <- c("ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
-               "od.pts", "earlystop", "overdose", "poorall", "ov.sel")
+    cname <- c(
+      "ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
+      "od.pts", "earlystop", "overdose", "poorall", "ov.sel"
+    )
     colnames(outputmat) <- cname
     cname <- c(cname, "design")
     outputmat <- cbind(outputmat, rep("tepi", nrow(outputmat)))

@@ -80,7 +80,6 @@ For example:
   obd = 3,
   mtd = 2
 )
-``
 }\if{html}{\out{</div>}}}
 
 \item{save_dir}{Directory to save output folders. Default is (\code{"."}).}

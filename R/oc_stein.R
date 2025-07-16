@@ -20,7 +20,7 @@
 #' @param u1 Numeric. Utility parameter w_11. (0-100)
 #' @param u2 Numeric. Utility parameter w_00. (0-100)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
 #'   - `obd`: Integer indicating the index of the true Optimal Biological Dose (OBD).
@@ -53,7 +53,6 @@ oc_stein <- function(ndose, target_t, lower_e,
                      psi1 = 0.2, psi2 = 0.6, psafe = 0.95, pfutility = 0.9,
                      ntrial = 10000, utilitytype = 1, u1, u2,
                      prob = NULL) {
-
   if (utilitytype == 1) {
     u1 <- 60
     u2 <- 40
@@ -81,7 +80,7 @@ oc_stein <- function(ndose, target_t, lower_e,
 
   bd.sel <- bd.pts <- od.sel <- od.pts <- ov.sel <- 0
   poorall <- incoherent <- overdose <- 0
-  #set.seed(30)
+  # set.seed(30)
   # Simulate trials
   for (trial in 1:ntrial) {
     yT <- yE <- n <- rep(0, ndose)

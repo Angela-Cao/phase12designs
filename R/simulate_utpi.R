@@ -55,26 +55,27 @@ simulate_utpi <- function(ndose, ssizerange, target_t, lower_e,
     OBD <<- iii
     outputmat <- NULL
     for (utype in c(1, 2)) {
-      for (rtype in c(1)){
-        for (i in ssizerange){
-
-          oc <- oc_utpi(ndose = ndose, target_t = target_t, lower_e = lower_e,
-                        ncohort = i, cohortsize = cohortsize,
-                        startdose = startdose,
-                        psafe = psafe, pfutility = pfutility,
-                        ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
-                        prob = prob)
+      for (rtype in c(1)) {
+        for (i in ssizerange) {
+          oc <- oc_utpi(
+            ndose = ndose, target_t = target_t, lower_e = lower_e,
+            ncohort = i, cohortsize = cohortsize,
+            startdose = startdose,
+            psafe = psafe, pfutility = pfutility,
+            ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
+            prob = prob
+          )
 
           print(i)
-          outputmat=rbind(outputmat,c(i,utype,rtype,c(oc$bd.sel,oc$od.sel,oc$bd.pts,oc$od.pts,oc$earlystop,oc$overdose,oc$poorall,oc$ov.sel)))
+          outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
     }
 
-    cname <- c("ncohort","utype","rtype","bd.sel","od.sel","bd.pts","od.pts","earlystop","overdose","poorall","ov.sel")
+    cname <- c("ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts", "od.pts", "earlystop", "overdose", "poorall", "ov.sel")
     colnames(outputmat) <- cname
-    cname <- c(cname,"design")
-    outputmat <- cbind(outputmat,rep("utpi", nrow(outputmat)))
+    cname <- c(cname, "design")
+    outputmat <- cbind(outputmat, rep("utpi", nrow(outputmat)))
     colnames(outputmat) <- cname
 
 

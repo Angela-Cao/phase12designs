@@ -47,31 +47,35 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
                            cohortsize = 3, startdose = 1,
                            psi1 = 0.2, psi2 = 0.6, psafe = 0.95,
                            pfutility = 0.9, ntrial = 10000,
-                           utilitytype = 1,  u1, u2, prob = NULL,
+                           utilitytype = 1, u1, u2, prob = NULL,
                            save_dir = ".", save_folder = "stein_simulations",
                            save_file = "stein_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
-  for (iii in 1:ndose){
+  for (iii in 1:ndose) {
     OBD <<- iii
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
         for (i in ssizerange) {
-          oc = oc_stein(ndose = ndose, target_t = target_t, lower_e = lower_e,
-                        ncohort = i, cohortsize = cohortsize, startdose = startdose,
-                        cutoff_t = psafe, cutoff_e = pfutility,
-                        u1 = u1, u2 = u2, ntrial = ntrial,
-                        psi1 = psi1, psi2 = psi2,
-                        utilitytype = utype, prob = prob)
+          oc <- oc_stein(
+            ndose = ndose, target_t = target_t, lower_e = lower_e,
+            ncohort = i, cohortsize = cohortsize, startdose = startdose,
+            cutoff_t = psafe, cutoff_e = pfutility,
+            u1 = u1, u2 = u2, ntrial = ntrial,
+            psi1 = psi1, psi2 = psi2,
+            utilitytype = utype, prob = prob
+          )
           print(i)
-          outputmat=rbind(outputmat,c(i,utype,rtype,c(oc$bd.sel,oc$od.sel,oc$bd.pts,oc$od.pts,oc$earlystop,oc$overdose,oc$poorall,oc$ov.sel)))
+          outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
     }
-    cname <- c("ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
-               "od.pts", "earlystop", "overdose", "poorall", "ov.sel")
+    cname <- c(
+      "ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
+      "od.pts", "earlystop", "overdose", "poorall", "ov.sel"
+    )
     colnames(outputmat) <- cname
     cname <- c(cname, "design")
     outputmat <- cbind(outputmat, rep("stein", nrow(outputmat)))

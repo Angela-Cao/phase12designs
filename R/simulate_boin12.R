@@ -15,7 +15,7 @@
 #' @param ntrial  Integer. Number of random trial replications. (Default is `10000`)
 #' @param utilitytype Integer. Type of utility structure. (Default is `1`)
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
-#'   - If set to `2`: Use (w11 = 1, w00 = 0)  
+#'   - If set to `2`: Use (w11 = 1, w00 = 0)
 #'   - Other: Use user-specified values from `u1` and `u2`.
 #' @param u1 Numeric. Utility parameter w_11. (0-100)
 #' @param u2 Numeric. Utility parameter w_00. (0-100)
@@ -41,7 +41,7 @@
 #' @return Results are saved as CSV files organized by OBD within folders.
 #'
 #' @export
-#set.seed(30)
+# set.seed(30)
 simulate_boin12 <- function(ndose, ssizerange, target_t, lower_e,
                             cohortsize = 3, startdose = 1, psafe = 0.95,
                             pfutility = 0.9, ntrial = 10000,
@@ -51,27 +51,31 @@ simulate_boin12 <- function(ndose, ssizerange, target_t, lower_e,
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
-  for (iii in 1:ndose){
+  for (iii in 1:ndose) {
     OBD <<- iii
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
-        for (i in ssizerange){
-          oc <- oc_boin12(ndose = ndose, target_t = target_t,
-                          lower_e = lower_e, ncohort = i,
-                          cohortsize = cohortsize,
-                          startdose = startdose, psafe = psafe,
-                          pfutility = pfutility,
-                          ntrial = ntrial, utilitytype = utype,
-                          u1, u2, prob = prob)
-          #print(i)
+        for (i in ssizerange) {
+          oc <- oc_boin12(
+            ndose = ndose, target_t = target_t,
+            lower_e = lower_e, ncohort = i,
+            cohortsize = cohortsize,
+            startdose = startdose, psafe = psafe,
+            pfutility = pfutility,
+            ntrial = ntrial, utilitytype = utype,
+            u1, u2, prob = prob
+          )
+          # print(i)
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel))) # nolint: line_length_linter.
         }
       }
     }
 
-    cname <- c("ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
-               "od.pts", "earlystop", "overdose", "poorall", "ov.sel")
+    cname <- c(
+      "ncohort", "utype", "rtype", "bd.sel", "od.sel", "bd.pts",
+      "od.pts", "earlystop", "overdose", "poorall", "ov.sel"
+    )
     colnames(outputmat) <- cname
     cname <- c(cname, "design")
     outputmat <- cbind(outputmat, rep("boin12", nrow(outputmat)))

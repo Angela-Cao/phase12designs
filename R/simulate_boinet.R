@@ -17,7 +17,7 @@
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
 #'   - If set to `2`: Use (w11 = 1, w00 = 0)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
 #'   - `obd`: Integer indicating the index of the true Optimal Biological Dose (OBD).
@@ -38,14 +38,14 @@
 #' @return Results are saved as CSV files organized by OBD within folders.
 #'
 #' @export
-#set.seed(30)
+# set.seed(30)
 simulate_boinet <- function(ndose, ssizerange, target_t, lower_e,
-                             cohortsize = 3, startdose = 1,
-                             psafe = 0.95, pfutility = 0.90, ntrial = 10000,
-                             utilitytype = 1, prob = NULL,
-                             save_dir = ".",
-                             save_folder = "boinet_simulations",
-                             save_file = "boinet_simulation.csv") {
+                            cohortsize = 3, startdose = 1,
+                            psafe = 0.95, pfutility = 0.90, ntrial = 10000,
+                            utilitytype = 1, prob = NULL,
+                            save_dir = ".",
+                            save_folder = "boinet_simulations",
+                            save_file = "boinet_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
@@ -56,22 +56,25 @@ simulate_boinet <- function(ndose, ssizerange, target_t, lower_e,
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
         for (i in ssizerange) {
-
-          oc <- oc_boinet(ndose = ndose, target_t = target_t,
-                          lower_e = lower_e, ncohort = i,
-                          cohortsize = cohortsize,
-                          startdose = startdose,
-                          psafe = psafe, pfutility = pfutility,
-                          ntrial = ntrial, utilitytype = utype, prob = prob)
-          #print(i)
-          outputmat <- rbind(outputmat,c(i,utype,rtype,c(oc$bd.sel,oc$od.sel,oc$bd.pts,oc$od.pts,oc$earlystop,oc$overdose,oc$poorall,oc$ov.sel)))
+          oc <- oc_boinet(
+            ndose = ndose, target_t = target_t,
+            lower_e = lower_e, ncohort = i,
+            cohortsize = cohortsize,
+            startdose = startdose,
+            psafe = psafe, pfutility = pfutility,
+            ntrial = ntrial, utilitytype = utype, prob = prob
+          )
+          # print(i)
+          outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
     }
 
-    cname <- c("ncohort", "utype", "rtype", "bd.sel",
-               "od.sel", "bd.pts", "od.pts", "earlystop",
-               "overdose", "poorall", "ov.sel")
+    cname <- c(
+      "ncohort", "utype", "rtype", "bd.sel",
+      "od.sel", "bd.pts", "od.pts", "earlystop",
+      "overdose", "poorall", "ov.sel"
+    )
     colnames(outputmat) <- cname
     cname <- c(cname, "design")
     outputmat <- cbind(outputmat, rep("boinet", nrow(outputmat)))

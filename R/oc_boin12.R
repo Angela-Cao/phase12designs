@@ -13,12 +13,12 @@
 #' @param ntrial  Integer. Number of random trial replications. (Default is `10000`)
 #' @param utilitytype Integer. Type of utility structure. (Default is `1`)
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
-#'   - If set to `2`: Use (w11 = 1, w00 = 0)  
+#'   - If set to `2`: Use (w11 = 1, w00 = 0)
 #'   - Other: Use user-specified values from `u1` and `u2`.
 #' @param u1 Numeric. Utility parameter w_11. (0-100)
 #' @param u2 Numeric. Utility parameter w_00. (0-100)
 #' @param prob Fixed probability vectors. If not specified, a random scenario is used by default.
-#' Use this parameter to provide fixed probability vectors as a list of the following named elements:  
+#' Use this parameter to provide fixed probability vectors as a list of the following named elements:
 #'   - `pE`: Numeric vector of efficacy probabilities for each dose level.
 #'   - `pT`: Numeric vector of toxicity probabilities for each dose level.
 #'   - `obd`: Integer indicating the index of the true Optimal Biological Dose (OBD).
@@ -46,7 +46,7 @@
 #' }
 #'
 #' @export
-#set.seed(30)
+# set.seed(30)
 oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
                       cohortsize = 3, startdose = 1,
                       psafe = 0.95, pfutility = 0.95,
@@ -85,30 +85,30 @@ oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
   pts <- rep(0, ndose)
   dlt <- rep(0, ndose)
   eff <- rep(0, ndose)
-  poorall <- 0;
-  temp <- get.boundary(target_t, lower_e, ncohort, cohortsize,cutoff.eli=psafe, cutoff.eli.E = pfutility)
-  b.e <- temp[4, ]   # escalation boundary
-  b.d <- temp[3, ]   # deescalation boundary
-  b.elim <- temp[2, ]  # elimination boundary
+  poorall <- 0
+  temp <- get.boundary(target_t, lower_e, ncohort, cohortsize, cutoff.eli = psafe, cutoff.eli.E = pfutility)
+  b.e <- temp[4, ] # escalation boundary
+  b.d <- temp[3, ] # deescalation boundary
+  b.elim <- temp[2, ] # elimination boundary
   b.elimE <- temp[5, ]
   u01 <- 100
   u10 <- 0
-  u11  <-  u1
-  u00  <-  u2
+  u11 <- u1
+  u00 <- u2
   utility <- c(u11, u10, u01, u00)
   # Assume independence between toxicity and efficacy
   targetP <- c(lower_e * target_t, target_t * (1 - lower_e), (1 - target_t) * lower_e, (1 - target_t) * (1 - lower_e))
   # Calculate the benchmark utility
-  uu  <-  sum(targetP * utility) #highest unacceptable utility
-  uu  <-  uu + (100 - uu) / 2 # benchmark utility (i.e., desirable utility)
+  uu <- sum(targetP * utility) # highest unacceptable utility
+  uu <- uu + (100 - uu) / 2 # benchmark utility (i.e., desirable utility)
   # Calculate true utility
   p10 <- p01 <- p00 <- p11 <- rep(0, ndose)
   if (FALSE) {
-    for(d in 1:ndose) {
-      p11[d] <- integrate(f1,bn.m1=qnorm(pT.true[d]),bn.m2=qnorm(pE.true[d]),rho=rho,lower=0,upper=Inf)$value
+    for (d in 1:ndose) {
+      p11[d] <- integrate(f1, bn.m1 = qnorm(pT.true[d]), bn.m2 = qnorm(pE.true[d]), rho = rho, lower = 0, upper = Inf)$value
       p10[d] <- pT.true[d] - p11[d]
       p01[d] <- pE.true[d] - p11[d]
-     p00[d] <- 1 - p11[d] - p10[d] - p01[d]
+      p00[d] <- 1 - p11[d] - p10[d] - p01[d]
     }
   }
   for (trial in 1:ntrial) {
@@ -124,27 +124,27 @@ oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
     u.true <- (u1 * pE.true + (1 - pT.true) * u2)
     bd <- probs$obd
     mtd <- probs$mtd
-    yT <- yE <- rep(0, ndose)    ## number of DLT/efficacy at each dose level
+    yT <- yE <- rep(0, ndose) ## number of DLT/efficacy at each dose level
     y01 <- y10 <- y11 <- y00 <- rep(0, ndose) ## number of different outcomes at each dose level
-    n <- rep(0, ndose)        ## number of patients treated at each dose level
-    earlystop <- 0            ## indicate whether the trial terminates early
-    d <- startdose            ## starting dose level
-    elimi <- rep(0, ndose)  ## whether doses are eliminated due to toxicity
-    elimiE <- rep(0, ndose)  ## whether doses are eliminated due to efficacy
+    n <- rep(0, ndose) ## number of patients treated at each dose level
+    earlystop <- 0 ## indicate whether the trial terminates early
+    d <- startdose ## starting dose level
+    elimi <- rep(0, ndose) ## whether doses are eliminated due to toxicity
+    elimiE <- rep(0, ndose) ## whether doses are eliminated due to efficacy
     safe <- 0
     posH <- rep(1 - uu / 100, ndose)
     duration <- 0
     for (i in 1:ncohort) {
-      T.time <- 0 #obscohort$t.tox
-      E.time <- 0 #obscohort$t.tox
-      inter.arrival <- 0 #cumsum(rexp(cohortsize,rate=accrual.rate))
-      t.all.seen <- 0 #inter.arrival+pmax(T.time,E.time)
+      T.time <- 0 # obscohort$t.tox
+      E.time <- 0 # obscohort$t.tox
+      inter.arrival <- 0 # cumsum(rexp(cohortsize,rate=accrual.rate))
+      t.all.seen <- 0 # inter.arrival+pmax(T.time,E.time)
       duration <- duration + max(t.all.seen)
       n[d] <- n[d] + cohortsize
       wT <- sum(runif(cohortsize) < pT.true[d])
       yT[d] <- yT[d] + wT
       wE <- sum(runif(cohortsize) < pE.true[d])
-      yE[d] = yE[d] + wE
+      yE[d] <- yE[d] + wE
       nc <- n[d] / cohortsize
       # determine whether current dose level is overly toxic
       if (!is.na(b.elim[nc])) {
@@ -203,7 +203,7 @@ oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
         }
         if (d < ndose) {
           if (safe == 0) {
-            if (sum(elimi[(d+1):ndose] == 0) > 0) {
+            if (sum(elimi[(d + 1):ndose] == 0) > 0) {
               admi_set <- c(admi_set, d + min(which(elimi[(d + 1):ndose] == 0)))
             }
           } else {
@@ -212,7 +212,7 @@ oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
             }
           }
         }
-        temp.posH <- posH[admi_set] + runif(length(admi_set)) * (10 ^ -15)
+        temp.posH <- posH[admi_set] + runif(length(admi_set)) * (10^-15)
         d_opt <- admi_set[which.max(temp.posH)]
       }
 
@@ -281,8 +281,10 @@ oc_boin12 <- function(ndose, target_t, lower_e, ncohort = 10,
   dlt <- round(dlt, 1)
   u.true <- round(u.true, 1)
   earlystop <- sum(dselect == 99) / ntrial * 100
-  results <- list(bd.sel = bd.sel, od.sel = od.sel, bd.pts = bd.pts, od.pts = od.pts,
-                  earlystop = earlystop, ntox = ntox, neff = neff, u.mean = 0,
-                  overdose = overdose, poorall = poorall, incoherent=0, ov.sel = ov.sel)
+  results <- list(
+    bd.sel = bd.sel, od.sel = od.sel, bd.pts = bd.pts, od.pts = od.pts,
+    earlystop = earlystop, ntox = ntox, neff = neff, u.mean = 0,
+    overdose = overdose, poorall = poorall, incoherent = 0, ov.sel = ov.sel
+  )
   results
 }

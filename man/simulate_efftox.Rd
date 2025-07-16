@@ -8,7 +8,7 @@ simulate_efftox(
   ndose,
   ssizerange,
   target_t,
-  target_e,
+  lower_e,
   startdose = 1,
   ntrial = 10000,
   utilitytype = 1,
@@ -24,6 +24,8 @@ simulate_efftox(
 \item{ssizerange}{Integer vector. Range of number of cohorts to simulate. (\strong{Required})}
 
 \item{target_t}{Numeric. Target toxicity probability. (\strong{Required})}
+
+\item{lower_e}{Numeric. Minimum acceptable efficacy probability. (\strong{Required})}
 
 \item{startdose}{Integer. Starting dose level. (Default is \code{1})}
 
@@ -60,8 +62,6 @@ For example:
 \item{save_folder}{Folder name. (Default is "boin12_simulations")}
 
 \item{save_file}{File name. (Default is "boin12_simulation.csv")}
-
-\item{lower_e}{Numeric. Minimum acceptable efficacy probability. (\strong{Required})}
 }
 \value{
 Results are saved as CSV files organized by OBD within folders.
