@@ -62,7 +62,7 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
           oc <- oc_stein(
             ndose = ndose, target_t = target_t, lower_e = lower_e,
             ncohort = i, cohortsize = cohortsize, startdose = startdose,
-            cutoff_t = psafe, cutoff_e = pfutility,
+            psafe = psafe, pfutility = pfutility,
             u1 = u1, u2 = u2, ntrial = ntrial,
             psi1 = psi1, psi2 = psi2,
             utilitytype = utype, prob = prob
