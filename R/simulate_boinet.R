@@ -24,7 +24,7 @@
 #'   - `mtd`: Integer indicating the index of the true Maximum Tolerated Dose (MTD).
 #'
 #' For example:
-#' ```r
+#' ```r 
 #' prob <- list(
 #'   pE = c(0.4, 0.5, 0.6, 0.6, 0.6),
 #'   pT = c(0.1, 0.2, 0.3, 0.4, 0.4),
