@@ -28,14 +28,14 @@
 #'                     title = "Decision Zones")
 
 decision_plot <- function(filename,
-                                 filetype = c("png", "pdf", "svg"), # new parameter
+                                 filetype = c("png", "pdf", "svg"),
                                  xlab = "Toxicity Probability",
                                  ylab = "Efficacy Probability",
                                  x_breaks = c(0, 1),
                                  y_breaks = c(0, 1),
                                  x_labels = c(0, 1),
                                  y_labels = c(0, 1),
-                                 zones = list(), # each entry is entered as list(xmin, xmax, ymin, ymax, color)
+                                 zones = list(),
                                  legend_info = list(labels = NULL, colors = NULL),
                                  title = NULL,
                                  title_pos = c(0.05, 1.1),
@@ -85,10 +85,3 @@ decision_plot <- function(filename,
 
   dev.off()
 }
-
- zones <- list(list(xmin = 0.0, xmax = 0.2, ymin = 0, ymax = 1.0, color = "#a8eea8"),
-               list(xmin = .2, xmax = .3, ymin = 0, ymax = 0.6, color = "#a8eea8"),
-               list(xmin = .2, xmax = .3, ymin = .6, ymax = 1, color = "#a8d5ee"))
- decision_plot("test_plot1.png",
-                     filetype = "png", zones = zones,
-                     title = "Decision Zones")
