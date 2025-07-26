@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using Ji3+3
+#' Compute operating characteristics using Ji3+3
 #'
 #' `oc_ji3p3()` uses the  Ji3+3 design to compute operating charateristics of a user-specificed trial scenario.
 #' This design compares observed efficacy and toxicity with predefined target rates.

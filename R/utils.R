@@ -1,3 +1,14 @@
+#' @importFrom trialr efftox_solve_p efftox_simulate
+#' @importFrom Iso ufit
+#' @importFrom grDevices dev.off pdf png svg
+#' @importFrom graphics abline axis legend par rect text
+#' @importFrom stats dbeta dbinom dnorm pbeta pbinom pnorm rbeta runif
+#' @importFrom utils write.csv
+utils::globalVariables(c("OBD", "randomtype"))
+NULL
+
+
+
 simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
   if (OBD == 0) {
     obd <- sample(ndose, 1)

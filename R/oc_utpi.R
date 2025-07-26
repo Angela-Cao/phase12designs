@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using uTPI
+#' Compute operating characteristics using uTPI
 #'
 #' `oc_utpi()` uses the  uTPI design to compute operating charateristics of a user-specificed trial scenario.
 #' This design places significance on optimizing utility using a quasi-binomial likelihood approach.

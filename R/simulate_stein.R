@@ -1,4 +1,4 @@
-#' Simulate Operating Characteristics using STEIN
+#' Simulate operating characteristics using STEIN
 #'
 #' This function runs simulations of the STEIN design by
 #' evaluating operating characteristics over a range of cohort sizes. For each
@@ -54,7 +54,7 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
   for (iii in 1:ndose) {
-    OBD <<- iii
+    OBD <- iii
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {

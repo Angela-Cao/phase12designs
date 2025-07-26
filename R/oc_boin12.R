@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using BOIN12
+#' Compute operating characteristics using BOIN12
 #'
 #' `oc_boin12()` uses the BOIN12 design to compute operating charateristics of a user-specificed trial scenario.
 #' This design places significance on optimizing utility and the toxicity–efficacy trade-off.
@@ -32,7 +32,7 @@
 #'   obd = 3,
 #'   mtd = 2
 #' )
-#' ``` 
+#' ```
 #' @return A list containing operating characteristics such as:
 #' \describe{
 #'   \item{bd.sel}{OBD selection percentage}

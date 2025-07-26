@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using PRINTE
+#' Compute operating characteristics using PRINTE
 #'
 #' `oc_pite()` uses the PRINTE design to compute operating charateristics of a user-specificed trial scenario.
 #' This design maps toxicity and efficacy intervals onto a decision table, forming 16 equal-area regions.

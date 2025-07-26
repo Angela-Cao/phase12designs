@@ -1,4 +1,4 @@
-#' Simulate Operating Characteristics using Ji3+3
+#' Simulate operating characteristics using Ji3+3
 #'
 #' This function runs simulations of the Ji3+3 design by
 #' evaluating operating characteristics over a range of cohort sizes. For each
@@ -56,7 +56,7 @@ simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
   for (iii in 1:ndose) {
-    OBD <<- iii
+    OBD <- iii
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {

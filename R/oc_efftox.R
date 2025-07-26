@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using EffTox
+#' Compute operating characteristics using EffTox
 #'
 #' `oc_efftox()` uses the EffTox design to compute operating charateristics of a user-specificed trial scenario.
 #' This design uses toxicity–efficacy trade-off contours.

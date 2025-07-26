@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using TEPI
+#' Compute operating characteristics using TEPI
 #'
 #' `oc_tepi()` uses the TEPI design to compute operating charateristics of a user-specificed trial scenario.
 #' This design maps toxicity and efficacy intervals onto a decision table, forming 16 regions.

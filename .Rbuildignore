@@ -1,2 +1,6 @@
-^phase12designs\.Rproj$
-^\.Rproj\.user$
+^\\.git$
+^\\.gitignore$
+^\\.DS_Store$
+^\\.Rproj.user$
+^phase12designs/phase12designs\\.Rproj$
+^LICENSE\\.md$

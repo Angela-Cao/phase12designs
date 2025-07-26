@@ -1,4 +1,4 @@
-#' Simulate Operating Characteristics using EffTox
+#' Simulate operating characteristics using EffTox
 #'
 #' This function runs simulations of the EffTox design by
 #' evaluating operating characteristics over a range of cohort sizes. For each
@@ -44,7 +44,7 @@ simulate_efftox <- function(ndose, ssizerange, target_t, lower_e,
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
   for (iii in 1:ndose) {
-    OBD <<- iii
+    OBD <- iii
 
     xmat <- NULL
     for (utype in c(1, 2)) {

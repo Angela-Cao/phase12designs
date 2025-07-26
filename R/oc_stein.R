@@ -1,4 +1,4 @@
-#' Compute Operating Characteristics using STEIN
+#' Compute operating characteristics using STEIN
 #'
 #' `oc_stein()` uses the STEIN design to compute operating charateristics of a user-specificed trial scenario.
 #' This design uses target toxicity and efficacy rates separately to form the cutoff intervals within a decision map.
