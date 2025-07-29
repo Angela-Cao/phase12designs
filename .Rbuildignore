@@ -4,3 +4,5 @@
 ^\\.Rproj.user$
 ^phase12designs/phase12designs\\.Rproj$
 ^LICENSE\\.md$
+^doc$
+^Meta$

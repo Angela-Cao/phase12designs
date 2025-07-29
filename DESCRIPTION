@@ -17,3 +17,7 @@ Roxygen: list(markdown = TRUE)
 Imports:
     trialr,
     Iso
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr

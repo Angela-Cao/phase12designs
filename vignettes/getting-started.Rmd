@@ -1,0 +1,168 @@
+---
+title: "Getting Started"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting Started}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+## Introduction
+This vignette serves as an introductory guide to the `phase12designs` package. In this tutorial, we will walk through how to (1) install and load the package, (2) simulate a single scenario, and (3) simulate multiple scenarios For demonstrative purposes, we will be using the `uTPI` method [INSERT CITE] and its corresponding functions to run the simulations. Users are encouraged to consult the reference manual for additional specifications required by alternative methods.
+
+
+## Installation
+
+The development version of `phase12designs` can be installed from GitHub using the `devtools` package.
+
+```r
+install.packages("devtools")
+devtools::install_github("Angela-Cao/phase12designs")
+```
+
+After installation, load the package with:
+```r
+library(phase12designs)
+```
+
+## Simulating a Single Trial Scenario
+To simulate a single early-phase clinical trial scenario, select an `oc_*` function. These functions compute operating characteristics under fixed trial conditions for a specified design. Here, we use the `oc_utpi()` function to generate a scenario with target toxicity probability of $\phi_T = 0.35$ and lower efficacy rate limit of $\zeta_E = 0.25$. This call simulates 10,000 independent trials with 10 cohorts of 3 patients each, using the uTPI model. Since no explicit dose-level probabilities are provided, random scenarios are internally generated.
+
+```r
+results <- oc_utpi(
+  ndose = 5,
+  target_t = 0.35,
+  lower_e = 0.25,
+  ncohort = 10,
+  cohortsize = 3,
+  startdose = 1,
+  utilitytype = 1,
+  u1 = 60,     # only used if utilitytype != 1 or 2
+  u2 = 40,
+  prob = NULL,
+  ntrial = 10000
+)
+```
+
+The function returns a summary of key operating characteristics across all simulated trials:
+
+- `bd.sel`: Percentage of trials that selected the Optimal Biological Dose (OBD)
+
+- `od.sel`: Percentage of trials that selected a favorable dose
+
+- `bd.pts`: Average percentage of patients treated at the OBD
+
+- `od.pts`: Average percentage of patients treated at favorable doses
+
+- `earlystop`: Percentage of trials that stopped early due to safety or futility
+
+- `overdose`: Percentage of patients treated at overly toxic doses
+
+- `poorall`: Percentage of trials with poor dose allocation (i.e., patients not concentrated around the target dose)
+
+- `ov.sel`: Percentage of trials that selected an overdosed regimen
+
+To view the summarized results:
+
+```r
+print(results)
+```
+
+This output allows researchers to assess how well the design performs under the specified assumptions.
+
+### Fixed Scenarios
+To evaluate the performance of a design under a fixed, user-defined trial scenario, define a named list containing the following components:
+
+- `pE`: Numeric vector of true efficacy probabilities for each dose
+
+- `pT`: Numeric vector of true toxicity probabilities for each dose
+
+- `obd`: Index of the true Optimal Biological Dose (OBD)
+
+- `mtd`: Index of the true Maximum Tolerated Dose (MTD)
+
+For example,
+```r
+prob_fixed <- list(
+  pE = c(0.4, 0.5, 0.6, 0.6, 0.6),
+  pT = c(0.1, 0.2, 0.3, 0.4, 0.4),
+  obd = 3,
+  mtd = 2
+)
+```
+
+This example assumes increasing efficacy and toxicity probabilities across five dose levels, with the third dose as the true OBD and the second dose as the true MTD. To simulate under this fixed scenario, pass `prob_fixed` (instead of `NULL`) to the `prob` argument in the `oc_utpi()` function:
+
+```r
+results_fixed <- oc_utpi(
+  ndose = 5,
+  target_t = 0.35,
+  lower_e = 0.25,
+  prob = prob_fixed,
+)
+
+print(results_fixed)
+```
+
+### Customizing Utility Parameters
+To use a custom utility structure, assign `utilitytype` a value other than 1 or 2, which refer to predefined weights, and specify the desired weights through the `u1` and `u2` parameters. For example:
+
+```r
+results_custom <- oc_utpi(
+  ndose = 5,
+  target_t = 0.35,
+  lower_e = 0.25,
+  utilitytype = 3,
+  u1 = 50,
+  u2 = 30
+)
+```
+This flexibility allows users to tailor the relative importance of efficacy and toxicity outcomes to suit specific trial needs.
+
+## Simulating Multiple Scenarios
+To evaluate a design's performance across a range of clinical scenarios, select a `simulate_*` functions. These function evaluate operating characteristics under multiple configurations, such as varying number of cohorts, while optionally holding other parameters fixed.
+
+### Example Usage
+In this example, we demonstrate `simulate_utpi()`, which uses the `oc_utpi` function internally to evaluate operating characteristics. Here, we simulate trials with 5 dose levels, a target toxicity probability of $\phi_T = 0.45$, and a lower efficacy rate limit of $\zeta_E = 0.15$. We vary the number of cohorts from 8 to 12 and use the default cohort size of 3.
+
+```r
+simulate_utpi(
+  ndose = 5,
+  ssizerange = 8:12,
+  target_t = 0.45,
+  lower_e = 0.15,
+  cohortsize = 3,
+  startdose = 1,
+  ntrial = 1000,
+  utilitytype = 1,
+  u1 = 60,
+  u2 = 40,
+  save_dir = ".",
+  save_folder = "utpi_simulations",
+  save_file = "utpi_simulation.csv"
+)
+```
+
+By default, if the prob parameter is left as NULL, the function generates a different random scenario for each iteration. To simulate under a fixed probability scenario, pass a named list to the `prob` argument (see [Fixed Scenarios](#fixed-scenarios)).
+
+Each simulation replicates the trial process `ntrial` times for combinations of:
+
+- Utility types (preset types 1 and 2)
+
+- Sample sizes (`ssizerange`)
+
+- OBD index (1 through `ndose`)
+
+For each specified OBD, the function saves results in a subfolder (e.g., `./utpi_simulations/3/utpi_simulation.csv` for OBD = 3). Users can customize where the results are stored by specifying the `save_dir`, `save_folder`, and `save_file`.
+
+
+
+
+
