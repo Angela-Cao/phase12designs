@@ -69,7 +69,6 @@ simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
             psafe = psafe, pfutility = pfutility, ntrial = ntrial,
             utilitytype = utype, prob = prob
           )
-          print(i)
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }

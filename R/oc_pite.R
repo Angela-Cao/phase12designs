@@ -99,7 +99,6 @@ oc_pite <- function(ndose, target_t, target_e, lower_e, ncohort = 10,
   incoherent <- 0
   overdose <- 0
   dselect <- rep(0, ntrial)
-  set.seed(30)
   for (simul in 1:ntrial) {
     if (!is.null(prob)) {
       probs <- prob

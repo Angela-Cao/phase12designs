@@ -102,7 +102,6 @@ oc_efftox <- function(ndose, target_t, lower_e,
   )
 
   for (trial in 1:ntrial) {
-    set.seed(30 + trial)
     if (!is.null(prob)) {
       probs <- prob
     } else {

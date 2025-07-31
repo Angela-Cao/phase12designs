@@ -43,7 +43,7 @@
 #' }
 #'
 #' @export
-# set.seed(30)
+
 oc_boinet <- function(ndose, target_t, lower_e, ncohort = 10,
                       cohortsize = 3, startdose = 1, psafe = 0.95,
                       pfutility = 0.95, ntrial = 10000, utilitytype = 1,
@@ -94,7 +94,7 @@ oc_boinet <- function(ndose, target_t, lower_e, ncohort = 10,
   }
   eta <- 0.38
   ################## simulate trials ###################
-  set.seed(30)
+
 
   for (trial in 1:ntrial) {
     if (!is.null(prob)) {

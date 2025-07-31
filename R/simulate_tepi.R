@@ -76,7 +76,6 @@ simulate_tepi <- function(ndose, ssizerange, target_t, lower_e,
             ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
             prob = prob
           )
-          print(i)
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }

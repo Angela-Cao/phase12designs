@@ -93,7 +93,6 @@ oc_utpi <- function(ndose, target_t, lower_e,
   u.l <- seq(0, 0.9, by = 0.1)
   u.u <- seq(0.1, 1, by = 0.1)
 
-  set.seed(30)
   ################## simulate trials ###################
   for (trial in 1:ntrial)
   {

@@ -67,7 +67,6 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
             psi1 = psi1, psi2 = psi2,
             utilitytype = utype, prob = prob
           )
-          print(i)
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))
         }
       }
