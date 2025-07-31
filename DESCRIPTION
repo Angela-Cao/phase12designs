@@ -1,7 +1,7 @@
 Package: phase12designs
 Type: Package
 Title: Comprehensive Tools for Running Model-Assisted Phase I/II Trial Simulations
-Version: 0.1.0
+Version: 0.2.0
 Authors@R: c(person(given = "Angela", family = "Cao", role = c("aut", "cre"), email = "cao.t.angela@gmail.com"),
     person(given = "Haolun", family = "Shi", role = "ctb"))
 Author: Angela Cao [aut, cre], Haolun Shi [ctb]
