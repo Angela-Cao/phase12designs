@@ -32,10 +32,10 @@
 #'   mtd = 2
 #' )
 #' ```
-#' @param save_dir Directory to save output folders. Default is (\code{"."}).
+#' @param save_dir Directory to save output folders. Default is `tempdir()`.
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
-#' @return Results are saved as CSV files organized by OBD within folders.
+#' @return No return value, called for side effects
 #'
 #' @export
 # set.seed(30)
@@ -43,7 +43,7 @@ simulate_boinet <- function(ndose, ssizerange, target_t, lower_e,
                             cohortsize = 3, startdose = 1,
                             psafe = 0.95, pfutility = 0.90, ntrial = 10000,
                             utilitytype = 1, prob = NULL,
-                            save_dir = ".",
+                            save_dir = tempdir(),
                             save_folder = "boinet_simulations",
                             save_file = "boinet_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)

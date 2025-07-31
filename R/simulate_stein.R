@@ -37,10 +37,10 @@
 #'   mtd = 2
 #' )
 #' ```
-#' @param save_dir Directory to save output folders. Default is (\code{"."}).
+#' @param save_dir Directory to save output folders. Default is `tempdir()`.
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
-#' @return Results are saved as CSV files organized by OBD within folders.
+#' @return No return value, called for side effects
 #'
 #' @export
 simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
@@ -48,7 +48,7 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
                            psi1 = 0.2, psi2 = 0.6, psafe = 0.95,
                            pfutility = 0.9, ntrial = 10000,
                            utilitytype = 1, u1, u2, prob = NULL,
-                           save_dir = ".", save_folder = "stein_simulations",
+                           save_dir = tempdir(), save_folder = "stein_simulations",
                            save_file = "stein_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)

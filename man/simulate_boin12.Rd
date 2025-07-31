@@ -18,7 +18,7 @@ simulate_boin12(
   u1,
   u2,
   prob = NULL,
-  save_dir = ".",
+  save_dir = tempdir(),
   save_folder = "boin12_simulations",
   save_file = "boin12_simulation.csv"
 )
@@ -72,14 +72,14 @@ For example:
 )
 }\if{html}{\out{</div>}}}
 
-\item{save_dir}{Directory to save output folders. Default is (\code{"."}).}
+\item{save_dir}{Directory to save output folders. Default is \code{tempdir()}.}
 
 \item{save_folder}{Folder name. (Default is "boin12_simulations")}
 
 \item{save_file}{File name. (Default is "boin12_simulation.csv")}
 }
 \value{
-Results are saved as CSV files organized by OBD within folders.
+No return value, called for side effects
 }
 \description{
 This function runs simulations of the BOIN12 design by

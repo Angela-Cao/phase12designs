@@ -29,15 +29,15 @@
 #'   mtd = 2
 #' )
 #' ```
-#' @param save_dir Directory to save output folders. Default is (\code{"."}).
+#' @param save_dir Directory to save output folders. Default is `tempdir()`.
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
-#' @return Results are saved as CSV files organized by OBD within folders.
+#' @return No return value, called for side effects
 #'
 #' @export
 simulate_efftox <- function(ndose, ssizerange, target_t, lower_e,
                             startdose = 1, ntrial = 10000,
-                            utilitytype = 1, prob = NULL, save_dir = ".",
+                            utilitytype = 1, prob = NULL, save_dir = tempdir(),
                             save_folder = "efftox_simulations",
                             save_file = "efftox_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)

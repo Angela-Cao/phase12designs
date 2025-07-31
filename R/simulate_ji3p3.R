@@ -39,10 +39,10 @@
 #'   mtd = 2
 #' )
 #' ```
-#' @param save_dir Directory to save output folders. Default is (\code{"."}).
+#' @param save_dir Directory to save output folders. Default is `tempdir()`.
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
-#' @return Results are saved as CSV files organized by OBD within folders.
+#' @return No return value, called for side effects
 #'
 #' @export
 simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
@@ -50,7 +50,7 @@ simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
                            eps1 = 0.05, eps2 = 0.05,
                            psafe = 0.95, pfutility = 0.9, ntrial = 10000,
                            utilitytype = 1, u1, u2, prob = NULL,
-                           save_dir = ".", save_folder = "ji3p3_simulations",
+                           save_dir = tempdir(), save_folder = "ji3p3_simulations",
                            save_file = "ji3p3_simulation.csv") {
   full_save_root <- file.path(save_dir, save_folder)
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
