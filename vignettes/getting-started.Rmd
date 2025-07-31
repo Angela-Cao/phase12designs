@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ## Introduction
-This vignette serves as an introductory guide to the `phase12designs` package. In this tutorial, we will walk through how to (1) install and load the package, (2) simulate a single scenario, and (3) simulate multiple scenarios For demonstrative purposes, we will be using the `uTPI` method [INSERT CITE] and its corresponding functions to run the simulations. Users are encouraged to consult the reference manual for additional specifications required by alternative methods.
+This vignette serves as an introductory guide to the `phase12designs` package. In this tutorial, we will walk through how to (1) install and load the package, (2) simulate a single scenario, and (3) simulate multiple scenarios For demonstrative purposes, we will be using the `uTPI` method and its corresponding functions to run the simulations. Users are encouraged to consult the reference manual for additional specifications required by alternative methods.
 
 
 ## Installation
