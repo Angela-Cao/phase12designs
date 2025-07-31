@@ -47,7 +47,14 @@
 #'   \item{poorall}{Poor allocation percentage}
 #'   \item{ov.sel}{Overdose selection percentage}
 #' }
-#'
+#' @examples
+#' oc_ji3p3(
+#'   ndose = 5,
+#'   target_t = 0.3,
+#'   target_e = 0.35
+#'   lower_e = 0.4,
+#'   ntrial = 10,
+#' )
 #' @export
 
 oc_ji3p3 <- function(ndose, target_t, target_e,

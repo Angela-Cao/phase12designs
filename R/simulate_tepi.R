@@ -43,7 +43,14 @@
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
 #' @return No return value, called for side effects
-#'
+#' @example
+#' simulate_tepi(
+#'   ndose = 5,
+#'   ssizerange = 1:2,
+#'   target_t = 0.3,
+#'   lower_e = 0.4,
+#'   ntrial = 10,
+#' )
 #' @export
 # set.seed(30)
 simulate_tepi <- function(ndose, ssizerange, target_t, lower_e,

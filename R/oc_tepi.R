@@ -48,7 +48,13 @@
 #'   \item{poorall}{Poor allocation percentage}
 #'   \item{ov.sel}{Overdose selection percentage}
 #' }
-#'
+#' @examples
+#' oc_tepi(
+#'   ndose = 5,
+#'   target_t = 0.3,
+#'   lower_e = 0.4,
+#'   ntrial = 10,
+#' )
 #' @export
 
 # set.seed(30)

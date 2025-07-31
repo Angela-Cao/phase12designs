@@ -137,16 +137,11 @@ simulate_utpi(
   ndose = 5,
   ssizerange = 8:12,
   target_t = 0.45,
-  lower_e = 0.15,
+  lower_e = 0.35,
   cohortsize = 3,
   startdose = 1,
   ntrial = 1000,
-  utilitytype = 1,
-  u1 = 60,
-  u2 = 40,
-  save_dir = ".",
-  save_folder = "utpi_simulations",
-  save_file = "utpi_simulation.csv"
+  utilitytype = 1
 )
 ```
 
@@ -160,7 +155,7 @@ Each simulation replicates the trial process `ntrial` times for combinations of:
 
 - OBD index (1 through `ndose`)
 
-For each specified OBD, the function saves results in a subfolder (e.g., `./utpi_simulations/3/utpi_simulation.csv` for OBD = 3). Users can customize where the results are stored by specifying the `save_dir`, `save_folder`, and `save_file`.
+For each specified OBD, the function saves results in a subfolder.
 
 
 

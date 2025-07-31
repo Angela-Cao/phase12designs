@@ -44,7 +44,13 @@
 #'   \item{poorall}{Poor allocation percentage}
 #'   \item{ov.sel}{Overdose selection percentage}
 #' }
-#'
+#' @examples
+#' oc_utpi(
+#'   ndose = 5,
+#'   target_t = 0.3,
+#'   lower_e = 0.4,
+#'   ntrial = 10,
+#' )
 #' @export
 oc_utpi <- function(ndose, target_t, lower_e,
                     ncohort = 10, cohortsize = 3, startdose = 1,

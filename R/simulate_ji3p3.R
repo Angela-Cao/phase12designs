@@ -43,7 +43,23 @@
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
 #' @return No return value, called for side effects
-#'
+#' @examples
+#' prob <- list(
+#'   pE = c(0.4, 0.5, 0.6, 0.6, 0.6),
+#'   pT = c(0.1, 0.2, 0.3, 0.4, 0.4),
+#'   obd = 3,
+#'   mtd = 2
+#' )
+#' simulate_ji3p3(
+#'   ndose = 5,
+#'   ssizerange = 1:2,
+#'   target_t = 0.3,
+#'   target_e = 0.5,
+#'   lower_e = 0.4,
+#'   ntrial = 10,
+#'   prob = prob,
+#' )
+
 #' @export
 simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
                            lower_e, cohortsize = 3, startdose = 1,
