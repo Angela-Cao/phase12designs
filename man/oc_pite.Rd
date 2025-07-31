@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_pite.R
 \name{oc_pite}
 \alias{oc_pite}
-\title{Compute Operating Characteristics using PRINTE}
+\title{Compute operating characteristics using PRINTE}
 \usage{
 oc_pite(
   ndose,

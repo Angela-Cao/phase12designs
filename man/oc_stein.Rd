@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_stein.R
 \name{oc_stein}
 \alias{oc_stein}
-\title{Compute Operating Characteristics using STEIN}
+\title{Compute operating characteristics using STEIN}
 \usage{
 oc_stein(
   ndose,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_boin12.R
 \name{simulate_boin12}
 \alias{simulate_boin12}
-\title{Simulate Operating Characteristics using BOIN12.}
+\title{Simulate operating characteristics using BOIN12.}
 \usage{
 simulate_boin12(
   ndose,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_boin12.R
 \name{oc_boin12}
 \alias{oc_boin12}
-\title{Compute Operating Characteristics using BOIN12}
+\title{Compute operating characteristics using BOIN12}
 \usage{
 oc_boin12(
   ndose,

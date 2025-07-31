@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_pite.R
 \name{simulate_pite}
 \alias{simulate_pite}
-\title{Simulate Operating Characteristics using PRINTE}
+\title{Simulate operating characteristics using PRINTE}
 \usage{
 simulate_pite(
   ndose,

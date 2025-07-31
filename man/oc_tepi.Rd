@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_tepi.R
 \name{oc_tepi}
 \alias{oc_tepi}
-\title{Compute Operating Characteristics using TEPI}
+\title{Compute operating characteristics using TEPI}
 \usage{
 oc_tepi(
   ndose,

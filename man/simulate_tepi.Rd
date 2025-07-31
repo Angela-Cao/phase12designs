@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_tepi.R
 \name{simulate_tepi}
 \alias{simulate_tepi}
-\title{Simulate Operating Characteristics using TEPI}
+\title{Simulate operating characteristics using TEPI}
 \usage{
 simulate_tepi(
   ndose,

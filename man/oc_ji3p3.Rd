@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_ji3p3.R
 \name{oc_ji3p3}
 \alias{oc_ji3p3}
-\title{Compute Operating Characteristics using Ji3+3}
+\title{Compute operating characteristics using Ji3+3}
 \usage{
 oc_ji3p3(
   ndose,

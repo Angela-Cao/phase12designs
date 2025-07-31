@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_boinet.R
 \name{oc_boinet}
 \alias{oc_boinet}
-\title{Compute Operating Characteristics using BOINET}
+\title{Compute operating characteristics using BOINET}
 \usage{
 oc_boinet(
   ndose,

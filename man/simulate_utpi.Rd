@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_utpi.R
 \name{simulate_utpi}
 \alias{simulate_utpi}
-\title{Simulate Operating Characteristics using uTPI}
+\title{Simulate operating characteristics using uTPI}
 \usage{
 simulate_utpi(
   ndose,

@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_efftox.R
 \name{simulate_efftox}
 \alias{simulate_efftox}
-\title{Simulate Operating Characteristics using EffTox}
+\title{Simulate operating characteristics using EffTox}
 \usage{
 simulate_efftox(
   ndose,

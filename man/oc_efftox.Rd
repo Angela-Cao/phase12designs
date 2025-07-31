@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_efftox.R
 \name{oc_efftox}
 \alias{oc_efftox}
-\title{Compute Operating Characteristics using EffTox}
+\title{Compute operating characteristics using EffTox}
 \usage{
 oc_efftox(
   ndose,

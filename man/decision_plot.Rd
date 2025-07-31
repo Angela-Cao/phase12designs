@@ -2,7 +2,7 @@
 % Please edit documentation in R/decision_plot.r
 \name{decision_plot}
 \alias{decision_plot}
-\title{Decision Map Plot}
+\title{Decision map plot}
 \usage{
 decision_plot(
   filename,
@@ -53,6 +53,9 @@ decision_plot(
 
 \item{plot_size}{A numeric vector indicating width and height. (Default is c(7, 7)).}
 }
+\value{
+No return value, called for side effects
+}
 \description{
 This function creates a decision plot containing customizable decision zones.
 }
@@ -62,4 +65,5 @@ zones <- list(list(xmin = 0.0, xmax = 0.2, ymin = 0, ymax = 1.0, color = "#a8eea
               list(xmin = .2, xmax = .3, ymin = .6, ymax = 1, color = "#a8d5ee"))
 tmpfile <- tempfile(fileext = ".png")
 decision_plot(tmpfile, filetype = "png", zones = zones, title = "Decision Zones")
+
 }

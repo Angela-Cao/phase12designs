@@ -2,7 +2,7 @@
 % Please edit documentation in R/oc_utpi.R
 \name{oc_utpi}
 \alias{oc_utpi}
-\title{Compute Operating Characteristics using uTPI}
+\title{Compute operating characteristics using uTPI}
 \usage{
 oc_utpi(
   ndose,

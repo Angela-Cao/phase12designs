@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_boinet.R
 \name{simulate_boinet}
 \alias{simulate_boinet}
-\title{Simulate Operating Characteristics using BOINET}
+\title{Simulate operating characteristics using BOINET}
 \usage{
 simulate_boinet(
   ndose,

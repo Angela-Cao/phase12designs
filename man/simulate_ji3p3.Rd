@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_ji3p3.R
 \name{simulate_ji3p3}
 \alias{simulate_ji3p3}
-\title{Simulate Operating Characteristics using Ji3+3}
+\title{Simulate operating characteristics using Ji3+3}
 \usage{
 simulate_ji3p3(
   ndose,

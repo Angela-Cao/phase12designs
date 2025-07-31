@@ -2,7 +2,7 @@
 % Please edit documentation in R/simulate_stein.R
 \name{simulate_stein}
 \alias{simulate_stein}
-\title{Simulate Operating Characteristics using STEIN}
+\title{Simulate operating characteristics using STEIN}
 \usage{
 simulate_stein(
   ndose,

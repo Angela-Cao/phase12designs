@@ -17,6 +17,7 @@
 #' @param legend_pos A numeric vector (x, y) indicating the position of the legend.
 #' @param grid_lines Whether to include background grid lines. (Default is TRUE.)
 #' @param plot_size A numeric vector indicating width and height. (Default is c(7, 7)).
+#' @return No return value, called for side effects
 
 #' @export
 #' @examples
@@ -25,6 +26,7 @@
 #'               list(xmin = .2, xmax = .3, ymin = .6, ymax = 1, color = "#a8d5ee"))
 #' tmpfile <- tempfile(fileext = ".png")
 #' decision_plot(tmpfile, filetype = "png", zones = zones, title = "Decision Zones")
+#' 
 
 decision_plot <- function(filename,
                           filetype = c("png", "pdf", "svg"),
