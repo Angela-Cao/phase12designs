@@ -14,7 +14,7 @@ Description: Provides a comprehensive set of tools to simulate, evaluate, and co
  PRINTE (Lin, X., & Ji, Y (2021) <doi:10.1177/0962280220977009>),
  STEIN (Lin, R., & Yin, G. (2017) <doi:10.1002/sim.7428>),
  TEPI (Li, D. H., Whitmore, J. B., Guo, W., & Ji, Y. (2017) <doi:10.1158/1078-0432.CCR-16-1125>),
- and uTPI (Shi, H., Lin, R., & Lin, X. (2024) <doi:10.1002/bimj.202300398>).
+ and uTPI (Shi, H., Lin, R., & Lin, X. (2024) <doi:10.1002/sim.8922>).
  Includes flexible simulation parameters that allow
  researchers to efficiently compute operating characteristics under
  various fixed and random trial scenarios and export the results.
