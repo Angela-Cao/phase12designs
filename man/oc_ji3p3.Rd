@@ -95,3 +95,12 @@ A list containing operating characteristics such as:
 \code{oc_ji3p3()} uses the  Ji3+3 design to compute operating charateristics of a user-specificed trial scenario.
 This design compares observed efficacy and toxicity with predefined target rates.
 }
+\examples{
+oc_ji3p3(
+  ndose = 5,
+  target_t = 0.3,
+  target_e = 0.35
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}

@@ -54,7 +54,7 @@ decision_plot(
 \item{plot_size}{A numeric vector indicating width and height. (Default is c(7, 7)).}
 }
 \value{
-No return value, called for side effects
+No return value, called for side effects.
 }
 \description{
 This function creates a decision plot containing customizable decision zones.

@@ -11,6 +11,7 @@ oc_tepi(
   ncohort = 10,
   cohortsize = 3,
   startdose = 1,
+  OBD = 0,
   effint_l = c(0, lower_e, lower_e + 0.2, lower_e + 0.4),
   effint_u = c(lower_e, lower_e + 0.2, lower_e + 0.4, 1),
   toxint_l = c(0, 0.15, target_t, target_t + 0.05),
@@ -97,4 +98,12 @@ A list containing operating characteristics such as:
 \description{
 \code{oc_tepi()} uses the TEPI design to compute operating charateristics of a user-specificed trial scenario.
 This design maps toxicity and efficacy intervals onto a decision table, forming 16 regions.
+}
+\examples{
+oc_tepi(
+  ndose = 5,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
 }

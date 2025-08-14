@@ -86,3 +86,11 @@ A list containing operating characteristics such as:
 \code{oc_utpi()} uses the  uTPI design to compute operating charateristics of a user-specificed trial scenario.
 This design places significance on optimizing utility using a quasi-binomial likelihood approach.
 }
+\examples{
+oc_utpi(
+  ndose = 5,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}

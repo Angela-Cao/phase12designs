@@ -96,3 +96,20 @@ This function runs simulations of the Ji3+3 design by
 evaluating operating characteristics over a range of cohort sizes. For each
 dose level within the user-specified range, it performs multiple trials and saves the results to a corresponding file.
 }
+\examples{
+prob <- list(
+  pE = c(0.4, 0.5, 0.6, 0.6, 0.6),
+  pT = c(0.1, 0.2, 0.3, 0.4, 0.4),
+  obd = 3,
+  mtd = 2
+)
+simulate_ji3p3(
+  ndose = 5,
+  ssizerange = 1:2,
+  target_t = 0.3,
+  target_e = 0.5,
+  lower_e = 0.4,
+  ntrial = 10,
+  prob = prob,
+)
+}

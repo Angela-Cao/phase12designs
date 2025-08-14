@@ -98,3 +98,12 @@ This function runs simulations of the TEPI design by
 evaluating operating characteristics over a range of cohort sizes. For each
 dose level within the user-specified range, it performs multiple trials and saves the results to a corresponding file.
 }
+\examples{
+simulate_tepi(
+  ndose = 5,
+  ssizerange = 1:2,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}

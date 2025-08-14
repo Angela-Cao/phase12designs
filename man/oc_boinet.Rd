@@ -79,3 +79,11 @@ A list containing operating characteristics such as:
 \code{oc_boinet()} uses the BOINET design to compute operating charateristics of a user-specificed trial scenario.
 This design uses target toxicity and efficacy rates jointly to form the cutoff intervals within a decision map.
 }
+\examples{
+oc_boinet(
+  ndose = 5,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}

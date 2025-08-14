@@ -86,3 +86,12 @@ A list containing operating characteristics such as:
 \code{oc_boin12()} uses the BOIN12 design to compute operating charateristics of a user-specificed trial scenario.
 This design places significance on optimizing utility and the toxicity–efficacy trade-off.
 }
+\examples{
+oc_boin12(
+  ndose = 5,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
+
+}

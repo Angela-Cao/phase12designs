@@ -70,3 +70,11 @@ A list containing operating characteristics such as:
 \code{oc_efftox()} uses the EffTox design to compute operating charateristics of a user-specificed trial scenario.
 This design uses toxicity–efficacy trade-off contours.
 }
+\examples{
+oc_efftox(
+  ndose = 5,
+  target_t = 0.3,
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}

@@ -43,7 +43,7 @@
 #' @param save_folder Folder name. (Default is "boin12_simulations")
 #' @param save_file File name. (Default is "boin12_simulation.csv")
 #' @return No return value, called for side effects
-#' @example
+#' @examples
 #' simulate_tepi(
 #'   ndose = 5,
 #'   ssizerange = 1:2,

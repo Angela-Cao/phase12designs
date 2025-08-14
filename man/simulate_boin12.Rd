@@ -86,3 +86,19 @@ This function runs simulations of the BOIN12 design by
 evaluating operating characteristics over a range of cohort sizes. For each
 dose level within the user-specified range, it performs multiple trials and saves the results to a corresponding file.
 }
+\examples{
+prob <- list(
+  pE = c(0.4, 0.5, 0.6),
+  pT = c(0.1, 0.2, 0.3),
+  obd = 2,
+  mtd = 2
+)
+simulate_boin12(
+  ndose = 3,
+  ssizerange = c(3, 5),
+  target_t = 0.3,
+  lower_e = 0.2,
+  ntrial = 10,
+  prob = prob,
+)
+}

@@ -95,3 +95,12 @@ A list containing operating characteristics such as:
 \code{oc_pite()} uses the PRINTE design to compute operating charateristics of a user-specificed trial scenario.
 This design maps toxicity and efficacy intervals onto a decision table, forming 16 equal-area regions.
 }
+\examples{
+oc_pite(
+  ndose = 5,
+  target_t = 0.3,
+  target_e = 0.35
+  lower_e = 0.4,
+  ntrial = 10,
+)
+}
