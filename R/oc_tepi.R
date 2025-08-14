@@ -8,6 +8,9 @@
 #' @param ncohort Integer. Number of cohorts. (Default is `10`)
 #' @param cohortsize Integer. Size of a cohort. (Default is `3`)
 #' @param startdose Integer. Starting dose level. (Default is `1`)
+#' @param OBD Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+#'   - If set to `0`: Random OBD will be selected.
+#'   - Other: Treat this argument as the true OBD.
 #' @param effint_l Lower efficacy bounds for dose assignment decision table. (Default is `c(0,lower_e,lower_e+0.2,lower_e+0.4)`)
 #' @param effint_u Lower efficacy bounds for dose assignment decision table. (Default is `c(lower_e,lower_e+0.2,lower_e+0.4,1)`)
 #' @param toxint_l Lower toxicity bounds for dose assignment decision table. (Default is `c(0,0.15,target_t,target_t+0.05)`)

@@ -38,6 +38,12 @@ oc_tepi(
 
 \item{startdose}{Integer. Starting dose level. (Default is \code{1})}
 
+\item{OBD}{Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+\itemize{
+\item If set to \code{0}: Random OBD will be selected.
+\item Other: Treat this argument as the true OBD.
+}}
+
 \item{effint_l}{Lower efficacy bounds for dose assignment decision table. (Default is \code{c(0,lower_e,lower_e+0.2,lower_e+0.4)})}
 
 \item{effint_u}{Lower efficacy bounds for dose assignment decision table. (Default is \code{c(lower_e,lower_e+0.2,lower_e+0.4,1)})}
