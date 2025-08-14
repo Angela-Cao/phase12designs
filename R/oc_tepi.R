@@ -60,6 +60,7 @@
 # set.seed(30)
 oc_tepi <- function(ndose, target_t, lower_e, ncohort = 10, cohortsize = 3,
                     startdose = 1,
+                    OBD = 0,
                     effint_l = c(0, lower_e, lower_e + 0.2, lower_e + 0.4),
                     effint_u = c(lower_e, lower_e + 0.2, lower_e + 0.4, 1),
                     toxint_l = c(0, 0.15, target_t, target_t + 0.05),
@@ -115,7 +116,7 @@ oc_tepi <- function(ndose, target_t, lower_e, ncohort = 10, cohortsize = 3,
     if (!is.null(prob)) {
       probs <- prob
     } else {
-      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype)
+      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype, OBD = OBD)
     }
     jj <- probs$pE
     kk <- probs$pT

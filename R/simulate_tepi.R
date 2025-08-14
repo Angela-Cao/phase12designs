@@ -68,14 +68,13 @@ simulate_tepi <- function(ndose, ssizerange, target_t, lower_e,
   dir.create(full_save_root, recursive = TRUE, showWarnings = FALSE)
 
   for (iii in 1:ndose) {
-    OBD <- iii
-
     outputmat <- NULL
     for (utype in c(1, 2)) {
       for (rtype in c(1)) {
         for (i in ssizerange) {
           oc <- oc_tepi(
             ndose = ndose, target_t = target_t, lower_e = lower_e, ncohort = i,
+            OBD = iii,
             cohortsize = cohortsize, startdose = startdose,
             effint_l = effint_l, effint_u = effint_u,
             toxint_l = toxint_l, toxint_u = toxint_u,

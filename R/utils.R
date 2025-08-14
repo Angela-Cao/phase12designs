@@ -9,7 +9,7 @@ NULL
 
 
 
-simprob <- function(ndose, targetE, targetT, u1, u2, randomtype) {
+simprob <- function(ndose, targetE, targetT, u1, u2, randomtype, OBD = 0) {
   if (OBD == 0) {
     obd <- sample(ndose, 1)
   } else {
