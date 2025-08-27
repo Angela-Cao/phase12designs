@@ -7,6 +7,9 @@
 #' @param lower_e Numeric. Minimum acceptable efficacy probability. (**Required**)
 #' @param ncohort Integer. Number of cohorts. (Default is `10`)
 #' @param startdose Integer. Starting dose level. (Default is `1`)
+#' @param OBD Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+#'   - If set to `0`: Random OBD will be selected.
+#'   - Other: Treat this argument as the true OBD.
 #' @param ntrial  Integer. Number of random trial replications. (Default is `10000`)
 #' @param utilitytype Integer. Type of utility structure. (Default is `1`)
 #'   - If set to `1`: Use preset weights (w11 = 0.6, w00 = 0.4)
@@ -48,7 +51,7 @@
 #' @export
 
 oc_efftox <- function(ndose, target_t, lower_e,
-                      ncohort = 10, startdose = 1, ntrial = 10000,
+                      ncohort = 10, startdose = 1, OBD=0, ntrial = 10000,
                       utilitytype = 1, prob = NULL) {
   if (utilitytype == 1) {
     u1 <- 60
@@ -111,7 +114,7 @@ oc_efftox <- function(ndose, target_t, lower_e,
     if (!is.null(prob)) {
       probs <- prob
     } else {
-      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype)
+      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype, OBD = OBD)
     }
     jj <- probs$pE
     kk <- probs$pT

@@ -81,7 +81,7 @@ simulate_efftox <- function(ndose, ssizerange, target_t, lower_e,
       oc <- oc_efftox(
         ndose = ndose, target_t = target_t, lower_e = lower_e,
         ncohort = i, startdose = startdose, ntrial = ntrial,
-        utilitytype = utype, prob = prob
+        utilitytype = utype, prob = prob,OBD = OBD
       )
       # print(i)
       result_row <- c(

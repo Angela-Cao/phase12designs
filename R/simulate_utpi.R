@@ -68,7 +68,7 @@ simulate_utpi <- function(ndose, ssizerange, target_t, lower_e,
           oc <- oc_utpi(
             ndose = ndose, target_t = target_t, lower_e = lower_e,
             ncohort = i, cohortsize = cohortsize,
-            startdose = startdose,
+            startdose = startdose,OBD = OBD,
             psafe = psafe, pfutility = pfutility,
             ntrial = ntrial, utilitytype = utype, u1 = u1, u2 = u2,
             prob = prob

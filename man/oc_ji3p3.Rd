@@ -12,6 +12,7 @@ oc_ji3p3(
   ncohort = 10,
   cohortsize = 3,
   startdose = 1,
+  OBD = 0,
   eps1 = 0.05,
   eps2 = 0.05,
   psafe = 0.95,
@@ -37,6 +38,12 @@ oc_ji3p3(
 \item{cohortsize}{Integer. Size of a cohort. (Default is \code{3})}
 
 \item{startdose}{Integer. Starting dose level. (Default is \code{1})}
+
+\item{OBD}{Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+\itemize{
+\item If set to \code{0}: Random OBD will be selected.
+\item Other: Treat this argument as the true OBD.
+}}
 
 \item{eps1}{Numerical. Width of the subrectangle.}
 
@@ -99,7 +106,7 @@ This design compares observed efficacy and toxicity with predefined target rates
 oc_ji3p3(
   ndose = 5,
   target_t = 0.3,
-  target_e = 0.35
+  target_e = 0.35,
   lower_e = 0.4,
   ntrial = 10,
 )

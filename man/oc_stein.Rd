@@ -11,6 +11,7 @@ oc_stein(
   ncohort = 10,
   cohortsize = 3,
   startdose = 1,
+  OBD = 0,
   psi1 = 0.2,
   psi2 = 0.6,
   psafe = 0.95,
@@ -34,6 +35,12 @@ oc_stein(
 \item{cohortsize}{Integer. Size of a cohort. (Default is \code{3})}
 
 \item{startdose}{Integer. Starting dose level. (Default is \code{1})}
+
+\item{OBD}{Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+\itemize{
+\item If set to \code{0}: Random OBD will be selected.
+\item Other: Treat this argument as the true OBD.
+}}
 
 \item{psi1}{Numerical. Highest inefficacious efficacy probability.}
 

@@ -81,7 +81,7 @@ simulate_ji3p3 <- function(ndose, ssizerange, target_t, target_e,
             ndose = ndose, target_t = target_t,
             target_e = target_e, lower_e = lower_e, ncohort = i,
             cohortsize = cohortsize, startdose = startdose,
-            eps1 = eps1, eps2 = eps2, u1, u2,
+            eps1 = eps1, eps2 = eps2, u1, u2, OBD = OBD,
             psafe = psafe, pfutility = pfutility, ntrial = ntrial,
             utilitytype = utype, prob = prob
           )

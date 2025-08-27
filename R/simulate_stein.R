@@ -71,7 +71,7 @@ simulate_stein <- function(ndose, ssizerange, target_t, lower_e,
             ncohort = i, cohortsize = cohortsize, startdose = startdose,
             psafe = psafe, pfutility = pfutility,
             u1 = u1, u2 = u2, ntrial = ntrial,
-            psi1 = psi1, psi2 = psi2,
+            psi1 = psi1, psi2 = psi2,OBD = OBD,
             utilitytype = utype, prob = prob
           )
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))

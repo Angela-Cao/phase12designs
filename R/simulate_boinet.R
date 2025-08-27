@@ -73,7 +73,7 @@ simulate_boinet <- function(ndose, ssizerange, target_t, lower_e,
         for (i in ssizerange) {
           oc <- oc_boinet(
             ndose = ndose, target_t = target_t,
-            lower_e = lower_e, ncohort = i,
+            lower_e = lower_e, ncohort = i,OBD = OBD,
             cohortsize = cohortsize,
             startdose = startdose,
             psafe = psafe, pfutility = pfutility,

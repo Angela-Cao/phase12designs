@@ -9,6 +9,9 @@
 #' @param ncohort Integer. Number of cohorts. (Default is `10`)
 #' @param cohortsize Integer. Size of a cohort. (Default is `3`)
 #' @param startdose Integer. Starting dose level. (Default is `1`)
+#' @param OBD Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+#'   - If set to `0`: Random OBD will be selected.
+#'   - Other: Treat this argument as the true OBD.
 #' @param eps1 Numerical. Width of the subrectangle. (Default is '0.05')
 #' @param eps2 Numerical. Width of the subreactangle. (Default is '0.05')
 #' @param psafe Numeric. Early stopping cutoff for toxicity. (Default is `0.95`)
@@ -51,13 +54,14 @@
 #' oc_pite(
 #'   ndose = 5,
 #'   target_t = 0.3,
-#'   target_e = 0.35
+#'   target_e = 0.35,
 #'   lower_e = 0.4,
 #'   ntrial = 10,
 #' )
 #' @export
 oc_pite <- function(ndose, target_t, target_e, lower_e, ncohort = 10,
-                    cohortsize = 3, startdose = 1, eps1 = 0.05, eps2 = 0.05,
+                    cohortsize = 3, startdose = 1, OBD = 0,
+                    eps1 = 0.05, eps2 = 0.05,
                     psafe = 0.95, pfutility = 0.95, ntrial = 10000,
                     utilitytype = 1, u1, u2, prob = NULL) {
   if (utilitytype == 1) {
@@ -110,7 +114,7 @@ oc_pite <- function(ndose, target_t, target_e, lower_e, ncohort = 10,
     if (!is.null(prob)) {
       probs <- prob
     } else {
-      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype)
+      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype, OBD=OBD)
     }
     jj <- probs$pE
     kk <- probs$pT

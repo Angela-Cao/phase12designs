@@ -8,6 +8,9 @@
 #' @param ncohort Integer. Number of cohorts. (Default is `10`)
 #' @param cohortsize Integer. Size of a cohort. (Default is `3`)
 #' @param startdose Integer. Starting dose level. (Default is `1`)
+#' @param OBD Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+#'   - If set to `0`: Random OBD will be selected.
+#'   - Other: Treat this argument as the true OBD.
 #' @param psi1 Numerical. Highest inefficacious efficacy probability.
 #' @param psi2 Numerical. Lowest highly-promising efficacy probability.
 #' @param psafe Numeric. Early stopping cutoff for toxicity. (Default is `0.95`)
@@ -55,7 +58,7 @@
 #' )
 #' @export
 oc_stein <- function(ndose, target_t, lower_e,
-                     ncohort = 10, cohortsize = 3, startdose = 1,
+                     ncohort = 10, cohortsize = 3, startdose = 1, OBD=0,
                      psi1 = 0.2, psi2 = 0.6, psafe = 0.95, pfutility = 0.9,
                      ntrial = 10000, utilitytype = 1, u1, u2,
                      prob = NULL) {
@@ -97,7 +100,7 @@ oc_stein <- function(ndose, target_t, lower_e,
     if (!is.null(prob)) {
       probs <- prob
     } else {
-      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype)
+      probs <- simprob(ndose, lower_e, target_t, u1, u2, randomtype, OBD = OBD)
     }
     pE.true <- probs$pE
     pT.true <- probs$pT

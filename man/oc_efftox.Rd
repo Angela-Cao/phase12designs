@@ -10,6 +10,7 @@ oc_efftox(
   lower_e,
   ncohort = 10,
   startdose = 1,
+  OBD = 0,
   ntrial = 10000,
   utilitytype = 1,
   prob = NULL
@@ -25,6 +26,12 @@ oc_efftox(
 \item{ncohort}{Integer. Number of cohorts. (Default is \code{10})}
 
 \item{startdose}{Integer. Starting dose level. (Default is \code{1})}
+
+\item{OBD}{Integer. True index of the Optimal Biological Dose (OBD) for the trial scenario. (Default is 0)
+\itemize{
+\item If set to \code{0}: Random OBD will be selected.
+\item Other: Treat this argument as the true OBD.
+}}
 
 \item{ntrial}{Integer. Number of random trial replications. (Default is \code{10000})}
 

@@ -83,7 +83,7 @@ simulate_pite <- function(ndose, ssizerange,
             lower_e = lower_e, ncohort = i, cohortsize = cohortsize,
             startdose = startdose, eps1 = eps1, eps2 = eps2,
             psafe = psafe, pfutility = pfutility,
-            ntrial = ntrial,
+            ntrial = ntrial,OBD = OBD,
             utilitytype = utype, u1 = u1, u2 = u2, prob = prob
           )
           outputmat <- rbind(outputmat, c(i, utype, rtype, c(oc$bd.sel, oc$od.sel, oc$bd.pts, oc$od.pts, oc$earlystop, oc$overdose, oc$poorall, oc$ov.sel)))

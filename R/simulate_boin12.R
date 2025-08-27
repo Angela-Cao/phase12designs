@@ -76,7 +76,7 @@ simulate_boin12 <- function(ndose, ssizerange, target_t, lower_e,
             ndose = ndose, target_t = target_t,
             lower_e = lower_e, ncohort = i,
             cohortsize = cohortsize,
-            startdose = startdose, psafe = psafe,
+            startdose = startdose, OBD=OBD, psafe = psafe,
             pfutility = pfutility,
             ntrial = ntrial, utilitytype = utype,
             u1, u2, prob = prob
